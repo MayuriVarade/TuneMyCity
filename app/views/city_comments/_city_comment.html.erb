@@ -1,0 +1,9 @@
+<%= div_for city_comment do %>
+        <p>
+                <strong>
+                        Posted <%= time_ago_in_words(city_comment.created_at) %> ago
+                </strong>
+                <br/>
+                <%= city_comment.body %> by <%= @city_photo.name%>
+        </p>
+<% end %>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Tunemycity</title>
+  
+<%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "style.css", "default.css","jquery.fancybox.css"%>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/superfish.js" type="text/javascript"></script>
+<script src="/assets/jquery.isotope.js" type="text/javascript"></script>
+<!-- <script src="js/jquery.fitvids.js" type="text/javascript"></script> -->
+<script src="/assets/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="/assets/jquery.flexslider-min.js" type="text/javascript"></script>
+<!-- <script src="js/jquery.formLabels1.0.js" type="text/javascript"></script> -->
+<!-- <script src="js/jquery.jplayer.js" type="text/javascript"></script> -->
+<script src="/assets/jquery.ias.min.js" type="text/javascript"></script>
+
+<!--[if (gte IE 6)&(lte IE 8)]><script type="text/javascript" src="js/selectivizr-min.js"></script><![endif]-->
+<script defer src="/assets/scripts.js" type="text/javascript"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<center>
+
+
+   <%# if signed_in?%> 
+
+  <header id="header">
+
+        <div class="pre-head show-on-mobile">
+            <div class="wrap group">
+                <div class="pre-head-wgt group">
+                    <aside class="widget group widget_ci_social_widget"><a href="#" class="icn twitter">Twitter</a> <a href="#" class="icn facebook">Facebook</a> <a href="#" class="icn pinterest">Pinterest</a> <a href="#" class="icn youtube">Youtube</a></aside>
+
+                    <aside class="widget widget_search group">
+                        <form action="/" id="searchform2" class="searchform" method="get" role="search">
+                            <input size="27" type="text" title="Search" id="s2" class="s" name="s"> <a id="searchsubmit2" class="searchsubmit"><img src="/assets/search.png" alt="GO"></a>
+                        </form>
+                    </aside>
+                </div><!-- .header-wgt -->
+            </div>
+        </div><!-- .pre-head -->
+
+        <div id="site-head">
+            <div class="wrap group">
+                <hgroup class="logo">
+                    <h1><a href="/"><img src="/assets/color-default.png" alt=""></a></h1>
+            
+                 <% if (signed_in?)  %>
+
+                  <% if (@user.reputation).to_i == 100%>
+                   
+            <h1><a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=<%=current_user2.name%>&amp;p[url]=https://cdn4.iconfinder.com/data/icons/adelaide/512/award-512.png&amp;p[images][0]=&amp;p[summary]=<%= current_user2.email%> "target="_blank"><img src="/assets/badge-gold-icon.png" alt=""></a></h1>
+                    <%elsif (@user.reputation).to_i == 500 %>
+          
+            <h1><a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=<%=current_user2.name%>&amp;p[url]=https://cdn4.iconfinder.com/data/icons/adelaide/512/award-512.png&amp;p[images][0]=&amp;p[summary]=<%= current_user2.email%> "target="_blank">
+                <img alt='Facebook'src='/assets/badge-gold-icon.png' target="_blank"/></a></h1>
+                   
+                    <%elsif (@user.reputation).to_i == 1000%>
+            <h1><a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=<%=current_user2.name%>&amp;p[url]=https://cdn4.iconfinder.com/data/icons/adelaide/512/award-512.png&amp;p[images][0]=&amp;p[summary]=<%= current_user2.email%> "target="_blank"><img src="/assets/badge-silver-icon.png" alt=""></a></h1>
+                   
+                  <%end%>
+                  <%end%>
+             </hgroup>
+                <div class="header-wgt group">
+      
+     
+                  <aside class="widget widget_search group">
+                        <%= form_tag search_path,:id=>"searchform1", :class=>"searchform", :method=> :get do %>
+                        <%= text_field_tag :q, nil,:class=>"s",:id=>"s1" %>
+                        <%=  image_submit_tag ("/assets/search.png"),:class=>"searchsubmit" ,:id=>"searchsubmit1"%> 
+                        <%end%>
+                    </aside>
+                </div><!-- .header-wgt -->
+            </div><!-- .wrap < #header -->
+        </div><!-- #site-head -->
+  
+        <nav>
+            <div class="wrap group">
+                <ul id="navigation" class="group">
+                    <% if (signed_in?)  %>
+                    Logged in as <%= current_user2.name %>.
+                   <li>  <%= link_to "Log out", signout_path ,:method => :delete, :id => "sign_out" %></li>
+                    <li class="current_page_item"><a href="/">Home</a></li>
+                      <li><%= link_to 'Initiative', initiatives_path %></li>
+                       <li>  <%= link_to 'City Photo', city_photos_path %></li>
+                   
+                    
+                    <% else %>
+                    <!--  <li><%#= link_to "Sign up as Admin", sign_up_path(:type =>"Cityadmin")%></li>
+                    <li> <%#= link_to "Sign up User", sign_up_path%></li> -->
+                    
+                    <li> <%= link_to "Log in", log_in_path %></li>
+                    
+<!-- <a href="javascript:window.open('/auth/facebook?mode=plain', 'pop', 'width=500, height=400, scrollbars=1');void(0);" >Privacy</a> -->
+
+                   
+               <% end %>    
+                </ul>
+            </div><!-- .wrap < nav -->
+        </nav>
+         
+    </header>
+
+<%#åå= render 'layouts/header'%>
+<%#end%>
+ <footer id="footer">
+            <div class="wrap group">
+                <div class="footer-text">
+                    <a href="#">Tunemycity</a> &mdash; A Pinterest like site template.
+                </div>
+            </div>
+        </footer>
+<%= yield %>
+
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+
+</body>
+</html>

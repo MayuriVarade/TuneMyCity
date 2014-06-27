@@ -1,0 +1,88 @@
+
+<b style="color:red"id="notice"><%= notice %></b>
+ <div id="page">
+        <section id="main">
+            <div class="wrap group">
+                <div id="box-container">
+                    <div id="entry-listing" class="group">
+                       <% if signed_in?%>
+
+                        <article class="entry box isotope-item" id="intro">
+                            <div class="entry-content-cnt">
+
+                                <aside class="widget widget_ci_about_widget group">
+
+                                    <div class="widget_about group">
+                                        <img alt="about me" class="aligncenter" src="/assets/InitiativeStart1.png">
+                              
+                                     <h3 class="widget-title"> <%= link_to 'Create an Initiative', new_initiative_path %></h3>
+                                    </div>
+                                </aside>
+
+                                <aside class="widget widget_ci_twitter_widget group">
+                                    <h3 class="widget-title">Recent tweets</h3>
+
+                                    <div id="twitter_update_list">
+                                        <ul>
+                                            <li><span>@<a href="#">handle</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere tortor :)</span> <a href="#" class="twitter-time">about 6 hours ago</a></li>
+
+                                            <li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere tortor. <a href="#">http://www.example.com</a></span> <a href="#" class="twitter-time">about 11 hours ago</a></li>
+                                        </ul>
+                                    </div>
+                                </aside>
+                            </div>
+                        </article><!-- #intro -->
+                        <%end%>
+
+
+                           <% @initiatives.each do |initiative| %>
+                                <% if initiative.is_approved %>
+                        
+                        <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
+                            <div class="entry-content-cnt">
+                            <div class="entry-content">
+                        <a href="<%= initiative.image.url%>"data-lightbox="fancybox[215]" class="thumb" ><%= image_tag initiative.image.url ,:class=>"attachment-ci_listing_thumb"%></a>
+                           </div>
+                                 <%= developed(initiative)%>
+                                    
+                            </div>
+
+                            <div class="entry-desc">
+                                <h1><a><%= link_to initiative.title,initiative%></a></h1>
+
+                                <div class="entry-meta group">
+                                    
+                                <a class="comments-no" <%= link_to "",initiative%><%= initiative.comments.count %></a>
+                                
+                                   <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to 'Good Initiative',like_initiative_initiatives_path(:id =>initiative.id),:method => "post",:remote => true,:id => "like_initiative",%>&nbsp;</span>
+                                   </a>
+                                <a><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
+                               </a>
+                                
+                              
+                             <!--  -->
+                                <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a>
+                                </div>
+                            </div>
+                           
+                             <% if current_user == initiative.user %>
+                            <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
+                            <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <%end%>
+                        </article>
+                   <%end%>
+                     
+                       <%end%>
+                    </div><!-- #entry-listing -->
+    
+                    <div class="nav">
+                        <a id="nextpage" href="content1.html">Next Page</a>
+                    </div>
+                </div>
+            </div><!-- .wrap < #main -->
+        </section><!--  #main -->
+
+       
+    </div><!-- #page -->
+
+  

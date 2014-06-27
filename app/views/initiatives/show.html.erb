@@ -1,0 +1,107 @@
+ <%= javascript_include_tag "jquery-1.5.2.min","jquery.validate.min","validation" %>
+  <%#= render 'layouts/header'%>
+ 
+ <section id="main">
+            <div class="wrap group">
+                <div class="inner-container group">
+                    <div class="box-hold group">
+                        <article class="entry box format-standard">
+                            <div class="entry-intro">
+                                <h1 align="left"><%= @initiative.title rescue nil %></h1>
+                                <div align="left"><span class="entry-meta">Posted by <strong><%= @initiative.user.name rescue nil %></strong>, at <time datetime="2012-08-07"><%= @initiative.created_at.strftime("#{@initiative.created_at.day.ordinalize}  %B, %Y")%></time>
+                                </div>
+                                </span> 
+                                <div align="right">
+                                <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to 'Good Initiative',like_initiative_initiatives_path(:id =>@initiative.id),:method => "post",:remote => true,:id => "like_initiative"%>&nbsp;</span>
+                                </a>
+                                <a val= "<%=@initiative.id %>"><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>@initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>@initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
+                               </a>
+                              </div>
+                            </div><!-- .entry-intro -->
+
+                            <figure class="entry-image"><a href="<%= @initiative.image.url %>" data-lightbox="fancybox" class="entry-image"><%= image_tag @initiative.image.url%></a></figure>
+                              
+                            <div class="entry-content">
+                               
+
+                                <h2 align="left"><%= @initiative.initiative_category%></h2>
+
+                              
+
+                                <p align="left"> <%= @initiative.initiative_description %></p>
+
+                                
+                            </div>
+
+                            <div class="social-share"></div>
+                        </article>
+                    </div><!-- .box-hold -->
+                    
+            <div class="box-hold">
+                    <div class="box comment-form">
+
+                            <div class="box-content">
+                            <% if (@initiative.votes_for).to_i >= 5%>
+                                   
+                            <%else%>
+                                 
+                                    <h3>Post your comment</h3>
+                                              <%= form_for [@initiative, Comment.new],:html => {:id => "contactform3",:class=>"group" } do |f| %>
+                                             <fieldset>
+                                                <p>
+                                                  <%= f.text_area :body ,:cols=>"30", :rows=>"4" %>
+                                                  <%= f.hidden_field :user_id,:value => current_user2.id%>
+                                            </fieldset>
+                                            <p align="right"><%= f.submit "Add comment", :class => 'btn btn-info' %></p>
+                                             <% end %>
+                            <%end%>
+                            </div>
+                    </div>
+
+                        <div class="box post-comments">
+                            <div class="box-content">
+                                <h3 align="left"><%= @initiative.comments.count %> Comments</h3>
+
+                                <ol id="comment-list" class="group">
+                                      <% @initiative.comments.each do |comment| %>
+                                    <li class="comment">
+                                        
+                                      <div  align="left">  <span class="comment-meta">Posted by <strong><%= comment.user.name rescue nil %></strong>, at <time datetime="2012-08-07"><%= @initiative.created_at.strftime("#{@initiative.created_at.day.ordinalize}  %B, %Y")%></time> 
+                                         </div> 
+                                        <div class="comment-text group">
+                                            <%= image_tag @initiative.image.url(:small), :class=>"avatar"%>
+
+                                            <div class="comment-copy">
+                                           <p align="left"><%= comment.body %></p>
+                                            </div>
+                                        </div>
+                                      
+                                    </li>
+
+                                
+                                   <%end%>
+                           
+                                </ol><a class="load-more-comments" href="#">View 38 More Comments...</a>
+                            </div>
+                        </div>
+                    </div><!-- .box-hold -->
+                </div><!-- .inner-container -->
+            </div><!-- .wrap < #main -->
+        </section>
+
+<!--  <footer id="footer">
+            <div class="wrap group">
+                <div class="footer-text">
+                    <a href="#">Pinfinity</a> &mdash; A Pinterest like site template.
+                </div>
+            </div>
+        </footer>
+ -->
+
+
+
+
+
+
+
+<%= link_to 'Edit', edit_initiative_path(@initiative) %> |

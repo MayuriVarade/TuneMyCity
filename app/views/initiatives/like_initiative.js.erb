@@ -1,0 +1,9 @@
+
+<% if current_user2.likes?(@initiative) %>
+jQuery("#like_initiative img").attr("src","/assets/like.png");
+jQuery("#like_count_initiative_<%= params[:id]%>").html('<%= "#{@counts}"%>');
+<% else %>
+jQuery("#like_initiative img").attr("src","/assets/like.png");
+jQuery("#like_count_initiative_<%= params[:id]%>").html('<%= "#{Like.sum('count')
+} likes."%>');
+<% end %>

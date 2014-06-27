@@ -1,0 +1,94 @@
+
+<body>
+
+  <%#= render 'layouts/header'%>
+
+    <div id="page">
+        <section id="main">
+            <div class="wrap group">
+                <div id="box-container">
+                    <div id="entry-listing" class="group">
+                       <% if signed_in?%> 
+                        <article class="entry box isotope-item" id="intro">
+                            <div class="entry-content-cnt">
+                                <aside class="widget widget_ci_about_widget group">
+                                    
+
+                                    <div class="widget_about group">
+                                        <img alt="about me" class="aligncenter" src="/assets/InitiativeStart1.png">
+                                         
+                                     <h3 class="widget-title"> <%= link_to 'Create an City Photo', new_city_photo_path %></h3>
+                                    </div>
+                                </aside>
+
+                             <!--    <aside class="widget widget_ci_twitter_widget group">
+                                    <h3 class="widget-title">Recent tweets</h3>
+
+                                    <div id="twitter_update_list">
+                                        <ul>
+                                            <li><span>@<a href="#">handle</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere tortor :)</span> <a href="#" class="twitter-time">about 6 hours ago</a></li>
+
+                                            <li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere tortor. <a href="#">http://www.example.com</a></span> <a href="#" class="twitter-time">about 11 hours ago</a></li>
+                                        </ul>
+                                    </div>
+                                </aside> -->
+                            </div>
+                        </article><!-- #intro -->
+                        <%end%>
+                          <% @city_photos.each do |city_photo| %>
+
+                        
+                        <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
+                            <div class="entry-content-cnt">
+                            <div class="entry-content">
+                        <a href="<%= city_photo.image.url%>"data-lightbox="fancybox[215]" class="thumb" ><%= image_tag city_photo.image.url ,:class=>"attachment-ci_listing_thumb"%></a>
+                           </div>
+                                 
+                            </div>
+
+                            <div class="entry-desc">
+                                <h1><a><%= link_to city_photo.title,city_photo%></a></h1>
+                                
+                                <div class="entry-meta group">
+                                    <a><%= city_photo.city_name%>&nbsp;</a>
+                                <a class="comments-no" <%= link_to "",city_photo%><%= city_photo.city_comments.count %></a> &nbsp;
+                                <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to (image_tag "like.png"),like_city_photo_city_photos_path(:id =>city_photo.id),:method => "post",:remote => true,:id => "like_city_photo"%>&nbsp;</span>
+                                </a>
+                                <a val= "<%=city_photo.id %>"><%= link_to Like.where(:likeable_type=>"CityPhoto",:likeable_id=>city_photo.id).sum(:count) ,like_count_city_photos_path(:id =>city_photo.id), :id=>"like_count",:method => "get",:remote=> true %>
+                               </a>
+                               
+                                <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a>
+                                </div>
+                            </div>
+                           
+                             <% if current_user == city_photo.user %>
+                            <td><%= link_to 'Edit', edit_city_photo_path(city_photo) %></td>
+                            <td><%= link_to 'Destroy', city_photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <%end%>
+                        </article>
+                   <%end%>
+                       
+                    </div><!-- #entry-listing -->
+    
+                    <div class="nav">
+                        <a id="nextpage" href="content1.html">Next Page</a>
+                    </div>
+                </div>
+            </div><!-- .wrap < #main -->
+        </section><!--  #main -->
+
+       
+    </div><!-- #page -->
+
+
+
+
+
+
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/66565660ns.gif" /></p></noscript>
+
+
+<!-- end olark code -->
+
+</body>
+</html>

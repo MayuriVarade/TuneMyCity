@@ -1,0 +1,126 @@
+
+<% if signed_in?%> 
+
+    <% if (current_user2.role? :Superadmin)%>
+       <%= render 'users/country_state_city.html.erb'%>
+    <% elsif current_user2.role? :Cityadmin %>
+       <%= render 'users/country_state_city.html.erb'%>
+
+        <table>
+      <tr>
+      <th>#</th>
+      <th>Initiative</th>
+      <th>Activate &nbsp; &nbsp;</th>
+      <th>Deactivate</th>
+      </tr>
+
+       <% @initiatives.each.with_index(1) do |initiative,index| %>
+      <tr>
+       <td><%= index %></td>
+       <td><%= initiative.title rescue nil%> &nbsp; &nbsp;</td>
+            
+       <%if (initiative.is_approved == false) %>
+           <td><%= button_to "Approve",{:controller => 'initiatives',:action => 'approve', :id => initiative.id}%></td>
+       <%else%>
+           <td><%= link_to "Approve",{:controller => 'initiatives',:action => 'approve', :id => initiative.id}, :class=> "disabled"%></td>
+       <%end%>
+    
+       <td><%= button_to "Disapprove",{:controller => 'initiatives',:action => 'cancel', :id => initiative.id} ,:onclick => "this.disabled = true"%></td>
+       <td><%#= link_to format_boolean(initiative.is_approved?), {:controller => 'initiatives', :action => 'toggled_status', :id => initiative.id} %></td>
+       <td><%#= link_to format_toogle(initiative.is_approved?), {:controller => 'initiatives', :action => 'deactivate', :id => initiative.id} %></td>
+      </tr>
+       <%end%>
+        </table><br/>
+     
+        <table>
+ <label class="control-label">City admin Nominations.</label>
+      <tr>
+         <th>#</th>
+        <th>User &nbsp; &nbsp;</th>
+      <th>Email</th>
+      </tr>
+
+       <% @users.each.with_index(1) do |user,index| %>
+         <% if (user.reputation).to_i == 1000%>
+
+      <tr>
+       <td><%#= index %></td>
+       <td><%= user.name rescue nil%>&nbsp; &nbsp;</td>
+      <td><%= user.email %></td>
+      </tr>
+       <%end%>
+      <%end%>
+        </table>
+
+         
+        <table>
+      <tr>
+         <th>#</th>
+        <th>City Photo</th>
+      <th>Activate/Deactivate</th>
+      </tr>
+
+       <% @city_photos.each.with_index(1) do |city_photo,index| %>
+      <tr>
+       <td><%= index %></td>
+       <td><%= city_photo.title rescue nil%></td>
+      <td><%= link_to format_boolean(city_photo.is_approved?), {:controller => 'city_photos', :action => 'toggled_status', :id => city_photo.id} %></td>
+      </tr>
+      <%end%>
+        </table>
+       
+
+         
+    <%else%>
+    
+       <%= render "initiatives/initiatives" %>
+       
+      <%= form_for @user do |f| %>
+      
+         <%= f.label :city_id, "City" %>
+         <%= f.collection_select :city_id, City.order(:city_name),:id, :city_name, include_blank: true %>
+      
+      <%end%>
+
+        <% unless current_user2.authenticated_networks.include?("facebook") %>
+         <div id="add-facebook">
+          <%= button_to "Connect Your Facebook Account", authentication_fb_path(:facebook), class: "button" %>
+         </div>
+        <% end %>
+      <% if current_user2.authenticated_networks.include?("facebook") %>
+         <div id="add-facebook">
+          <%= button_to "Connect Your Facebook Account", authentication_fb_path(:facebook), class: "button" %>
+         </div>
+      <% end %>
+    
+    <%end%>
+    <%else%>
+    <%= render 'city_photos/city_photos'%>
+    <%= render "initiatives/initiatives" %>
+
+<%end%>
+<script type="text/javascript">
+$("#submitbutton").click(
+   function() {
+      alert("Sending...");
+      window.location.replace("path to url");
+   }
+);
+$('#mylink').click(function(e){
+  e.preventDefault();
+});
+</script>
+<style>
+.disabled {
+cursor: default !important;
+pointer-events: none;
+}
+</style>
+<script>function fbs_click()
+{u=location.href;t=document.title;window.open
+('http://www.facebook.com/sharer.php?u='+
+encodeURIComponent(u)+'&t='+encodeURIComponent(t),
+'sharer','toolbar=0,status=0,width=6
+26,height=436');return false;}</script>
+<!-- <a href="http://www.facebook.com/share.php?u=<url>" onclick="return fbs_click()" target="_blank"> <img src= "http://b.static.ak.fbcdn.net/images/share/
+facebook_share_icon.gif?8:26981" alt="" /></a> -->

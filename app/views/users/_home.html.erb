@@ -1,0 +1,9 @@
+<% unless signed_in? %>
+<div class="jumbotron">
+ 
+  <p>
+        <!-- <a href="#">Sign Up Now!</a> -->
+        <%= link_to("Sign Up Now!", sign_up_path)%>
+  </p>
+</div>
+<% end %>

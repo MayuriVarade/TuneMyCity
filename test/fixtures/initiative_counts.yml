@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  initiative_id: 1
+  ups: 1
+  downs: 1
+
+two:
+  user_id: 1
+  initiative_id: 1
+  ups: 1
+  downs: 1

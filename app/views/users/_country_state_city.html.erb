@@ -1,0 +1,28 @@
+ <%= form_for @user do |f| %>
+  
+    <div class="field">
+      <%= f.label :country_id %><br />
+      <%= f.collection_select :country_id, Country.order(:name), :id, :name, include_blank: true %>
+    </div>
+    <div class="field">
+      <%= f.label :state_id, "State or Province" %><br />
+      <%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, include_blank: true %>
+    </div>
+    <div class="field">
+    <%= f.label :city_id, "City" %><br />
+    <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{:include_blank => true}%><br />
+    </div>
+    
+     <%= link_to 'Category', categories_path %></br>
+  <% end %>
+
+<!-- 
+  <script type= "text/javascript" src = "/assets/countries.js"></script>
+  <body>
+<select onchange="print_state('state',this.selectedIndex);" id="country" name ="country"></select>
+<br />
+City/District/State:
+<select name ="state" id ="state"></select>
+<script language="javascript">print_country("country");</script>
+
+  </body> -->

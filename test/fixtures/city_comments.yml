@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  city_photo: 
+  body: MyText
+  user_id: 1
+  city_photo_id: 1
+
+two:
+  city_photo: 
+  body: MyText
+  user_id: 1
+  city_photo_id: 1

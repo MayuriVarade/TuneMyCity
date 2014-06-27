@@ -1,0 +1,56 @@
+ <%= javascript_include_tag "jquery-1.5.2.min","jquery.validate.min","validation" %>
+<%#= render 'layouts/header'%>
+<section id="main">
+  <div class="wrap group">
+
+    <div class="inner-container half group">
+
+      <div class="box-hold group">
+        <article class="post-6 page type-page status-publish hentry entry box" id="post-6">
+          <div class="entry-intro">
+            <h1>Post an City Photo</h1>
+          </div> <!-- .entry-intro -->
+
+          <div class="entry-content group">
+
+          <p>Hello, don't hesitate to contact me via this marvelous contact form!</p>
+
+          <!-- <form id="contactform" action="/"> -->
+         
+            <%= form_for(@city_photo,:html => {:id => "contactform1" }) do |f| %>
+            <fieldset>
+              <p>
+              <%= f.text_field :title,:placeholder=>"Title" %>
+              </p>
+               <p>
+               <%= f.text_field :city_name,:placeholder=>"City" %>
+              </p>
+              <p>
+                  <%= f.text_area :about,:placeholder=>"About" %>
+                  <%= f.hidden_field :user_id,:value => current_user2.id%>
+              </p>
+              
+              <p>
+                <%= f.file_field :image, :class=>"alignleft" %>
+              </p>
+             
+            </fieldset>
+
+             <p align="right"><%= f.submit "Post", :class=>"btn btn-info"%></p>
+           <% end %>
+         <!--  </form> -->
+
+          </div>
+
+          <div class="social-share group">
+
+          </div>
+
+        </article>
+      </div> <!-- .box-hold -->
+
+
+    </div>
+
+  </div> <!-- .wrap < #main -->
+</section> <!--  #main -->
