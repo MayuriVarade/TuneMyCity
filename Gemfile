@@ -5,9 +5,6 @@ gem 'rails', '3.2.16'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
-
 gem "bcrypt-ruby", :require => "bcrypt"
 
 gem 'paperclip'
@@ -23,6 +20,8 @@ gem 'gmaps4rails'
 gem  'thumbs_up'
 gem 'obscenity', '~> 1.0.2'
 gem 'ransack'
+gem 'aws-s3'
+gem 'aws-sdk'
 # gem "socialization"
 # Gems used only for assets and not required
 # in production environments by default.
