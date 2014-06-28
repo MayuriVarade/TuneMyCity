@@ -1,18 +1,20 @@
 require 'obscenity/active_model'
 class Initiative < ActiveRecord::Base
   attr_accessible :about, :address, :is_approved, :is_developed, :latitude, :longitude, :name, :title, :user_id, :image, :initiative_description, :initiative_category, :initiative_name,:good_initiative
-  has_attached_file :image, :styles => { :small => "150x150>" }
-  has_attached_file :image, :styles => { :small => "150x150>" }
+  
+
+  has_attached_file :image, styles: {thumb: '150x150>',square: '1200x999#',medium: '200x200>'},
+  :storage => :s3, :s3_credentials => "#{Rails.root}/config/s3.yml",
+                    :path => "public/attachments/initiatives/:id/:style/:basename.:extension",
+                    
+                    :convert_options => {
+                          :thumb => "-compose Copy -gravity center -extent 140x100",
+                          :medium => "-compose Copy -gravity center -extent 350x350",
+                          
+                      }
   # validates_attachment_presence :image
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
-  # validates :initiative_category, :presence => {:message => 'Initiative category cannot be blank'}
-  # validates :initiative_description, :presence => {:message => 'Initiative description cannot be blank'}
-  # validates :about, :presence => {:message => 'About cannot be blank'}
-  # validates :address, :presence => {:message => 'Address cannot be blank'}
-  # validates :latitude, :presence => {:message => 'Latitude cannot be blank'}
-  # validates :longitude, :presence => {:message => 'Longitude cannot be blank'}
-  # validates :name, :presence => {:message => 'Name cannot be blank'}
-  # validates :initiative_name, :presence => {:message => ' Initiative Name cannot be blank'}
+ 
   validates :title,  obscenity: { sanitize: true, replacement: :stars  } 
    geocoded_by :address
    after_validation :geocode

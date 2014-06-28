@@ -88,6 +88,7 @@ end
   # GET /initiatives/1/edit
   def edit
     @initiative = Initiative.find(params[:id])
+    @user = User.find_by_id(current_user2)
   end
 
   # POST /initiatives

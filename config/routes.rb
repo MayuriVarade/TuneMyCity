@@ -6,24 +6,15 @@ Tunemycity::Application.routes.draw do
   resources :comments
   resources :password_resets
   match "/signout" => "sessions#destroy", :as => :signout
-  # get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
   get "dashboard" => "users#dashboard", :as => "dashboard"
-  # match "/auth/:provider/callback" => "sessions#create"
   match '/auth/:provider/callback', to: 'authentications#create'
   match '/auth/:provider', to: 'authentications#create', :as => "authentication_fb"
   match 'auth/failure', to: redirect('/')
   match '/initiatives/:id/approve' => 'initiatives#approve'
   match '/initiatives/:id/cancel' => 'initiatives#cancel'
-  # match '/initiatives/:id/is_approved', :to => "initiatives#toggled_status"
-  # match '/initiatives/:id/is_approved', :to => "initiatives#deactivate"
   match '/city_photos/:id/is_approved', :to => "city_photos#toggled_status"
-
-  # get  "refresh"  => "initiatives#refreshinitiative", :as => "refresh"
-  # get "votedup"  => "initiatives#votedup", :as => "votedup"
-  
-  # get  "refreshcity_photo"  => "city_photos#refreshcity_photo", :as => "refreshcity_photo"
   get "likes"  => "city_photos#likes", :as => "likes"
 
   root :to => "users#dashboard"
@@ -34,7 +25,7 @@ Tunemycity::Application.routes.draw do
   resources :sessions
   resources :categories
   resources :city_photos do 
-    resources :city_comments, :only => [:create]
+  resources :city_comments, :only => [:create]
      collection do
      
       post :like_city_photo
@@ -47,8 +38,8 @@ Tunemycity::Application.routes.draw do
 
   resources :authentications
 
- resources :initiatives do
-     member do
+  resources :initiatives do
+      member do
       post :vote_for_initiative
       post :vote_against_initiative
     end

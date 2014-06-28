@@ -38,6 +38,7 @@ class CityPhotosController < ApplicationController
   # GET /city_photos/1/edit
   def edit
     @city_photo = CityPhoto.find(params[:id])
+    @user = User.find_by_id(current_user2)
   end
 
   # POST /city_photos
