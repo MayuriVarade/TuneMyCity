@@ -65,7 +65,12 @@ end
 		  @user = User.find_by_id(current_user2)
       @users = User.all
     # raise (@user).inspect
-       if (signed_in?) and (@user)
+
+# raise (current_user2.role? :Cityadmin).inspect
+       if (signed_in?) and (current_user2.role? :Cityadmin)
+         @initiatives = Initiative.all
+         @city_photos = CityPhoto.all
+       elsif (signed_in?) and (@user)
       @initiatives = Initiative.find_all_by_city_id(current_user2.city_id)
       @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id)
        else
