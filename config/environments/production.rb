@@ -77,5 +77,5 @@ Tunemycity::Application.configure do
             :user_name => "mayuri.kipl@gmail.com",
             :password => "ankitakipl"
         }
-  config.action_mailer.default_url_options = { :host => 'http://tunemycity.herokuapp.com/' }
+  config.action_mailer.default_url_options = { :host => 'http://tunemycity.herokuapp.com' }
 end
