@@ -17,8 +17,7 @@ class User < ActiveRecord::Base
      # validates_uniqueness_of :reputation
     email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-    validates :email,:uniqueness => { :case_sensitive => false },:presence => { :message => " cannot be blank" }
-
+    validates :email,:uniqueness => { :case_sensitive => false }
     validates :password, :confirmation => true,:on => :create
      # validates_uniqueness_of :email,:presence => {:message => 'email id already exists'},:format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
  
