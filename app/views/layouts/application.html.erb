@@ -18,6 +18,9 @@
 
 <!--[if (gte IE 6)&(lte IE 8)]><script type="text/javascript" src="js/selectivizr-min.js"></script><![endif]-->
 <script defer src="/assets/scripts.js" type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -85,9 +88,8 @@
                    <li>  <%= link_to "Log out", signout_path ,:method => :delete, :id => "sign_out" %></li>
                     <li class="current_page_item"><a href="/">Home</a></li>
                       <li><%= link_to 'Initiative', initiatives_path %></li>
-                       <li>  <%= link_to 'City Photo', city_photos_path %></li>
-                   
-                    
+                       <li><%= link_to 'City Photo', city_photos_path %></li>
+                       <li><%= link_to "Choose your location", select_path %></li>
                     <% else %>
                     <!--  <li><%#= link_to "Sign up as Admin", sign_up_path(:type =>"Cityadmin")%></li>
                     <li> <%#= link_to "Sign up User", sign_up_path%></li> -->
@@ -113,11 +115,17 @@
                 </div>
             </div>
         </footer>
+         <% flash.each do |name, msg| %>
+  <% if signed_in?%>
+  <%= content_tag :div, msg, :class => "alert-box #{name}",:style=>"color:#0C3; text-align:center;" %>
+  <% else %>
+    <%= content_tag :div, msg, :class => "alert-box #{name}", :style=>"color:red; text-align:center;" %>
+  <% end %>
+
+ <% end %> 
 <%= yield %>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
+
 
 </body>
 </html>

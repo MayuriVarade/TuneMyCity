@@ -4,13 +4,15 @@ class CityPhotosController < ApplicationController
   # GET /city_photos
   # GET /city_photos.json
   def index
-    @city_photos = CityPhoto.order("created_at desc")
+    @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id)
      @user = User.find_by_id(current_user2)
+
      @city_photos1 = Hash["city_photo" => @city_photos]
-    respond_to do |format|
+     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @city_photos1 }
+      format.json { render :json => @initiative1 }
     end
+
   end
 
   # GET /city_photos/1

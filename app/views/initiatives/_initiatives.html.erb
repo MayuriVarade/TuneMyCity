@@ -1,15 +1,15 @@
 
-<b style="color:red"id="notice"><%= notice %></b>
  <div id="page">
         <section id="main">
             <div class="wrap group">
                 <div id="box-container">
                     <div id="entry-listing" class="group">
-                       <% if signed_in?%>
-
+                       <% if signed_in? %>
+                      <%if(request.path=="/initiatives")%>
                         <article class="entry box isotope-item" id="intro">
+                           
                             <div class="entry-content-cnt">
-
+                                 
                                 <aside class="widget widget_ci_about_widget group">
 
                                     <div class="widget_about group">
@@ -18,7 +18,7 @@
                                      <h3 class="widget-title"> <%= link_to 'Create an Initiative', new_initiative_path %></h3>
                                     </div>
                                 </aside>
-
+                              
                               <!--   <aside class="widget widget_ci_twitter_widget group">
                                     <h3 class="widget-title">Recent tweets</h3>
 
@@ -31,13 +31,15 @@
                                     </div>
                                 </aside> -->
                             </div>
+
                         </article><!-- #intro -->
                         <%end%>
-
+                         <%end%>
 
                            <% @initiatives.each do |initiative| %>
                                 <% if initiative.is_approved %>
-                        
+
+                         <%# if (Initiative.find(current_user2.city_id).city_name)%>
                         <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
                             <div class="entry-content-cnt">
                             <div class="entry-content">
@@ -48,8 +50,11 @@
                             </div>
 
                             <div class="entry-desc">
-                                <h1><a><%= link_to initiative.title,initiative%></a></h1>
-
+                          
+                                <h1><a ><%= link_to initiative.initiative_name,initiative%></a></h1>
+                                
+                                   <strong><%= City.find(initiative.city_id).city_name%></strong>
+                                 <!--  -->
                                 <div class="entry-meta group">
                                     
                                 <a class="comments-no" <%= link_to "",initiative%><%= initiative.comments.count %></a>
@@ -59,19 +64,17 @@
                                 <a><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
                                </a>
                                 
-                              
-                             <!--  -->
-                                <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a>
+                             <!--   <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a> -->
                                 </div>
                             </div>
                            
-                             <% if current_user == initiative.user %>
+                             <% if current_user2 == initiative.user %>
                             <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
                             <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                             <%end%>
                         </article>
-                   <%end%>
-                     
+                   <%#end%>
+                     <%end%>
                        <%end%>
                     </div><!-- #entry-listing -->
     

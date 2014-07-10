@@ -59,7 +59,7 @@
                                       <div  align="left">  <span class="comment-meta">Posted by <strong><%= city_comment.user.name %></strong>, at <time datetime="2012-08-07"><%= @city_photo.created_at.strftime("#{@city_photo.created_at.day.ordinalize}  %B, %Y")%></time> 
                                          </div> 
                                         <div class="comment-text group">
-                                            <%= image_tag @city_photo.image.url(:small), :class=>"avatar"%>
+                                            <%= image_tag @city_photo.image.url(:thumb), :class=>"avatar"%>
 
                                             <div class="comment-copy">
                                            <p align="left"><%= city_comment.body %></p>

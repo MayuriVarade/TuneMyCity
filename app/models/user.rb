@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    attr_accessible :email, :password, :password_confirmation, :name,:country_id, :state_id, :city_id, :role_ids, :salt,:reputation, :username
+    attr_accessible :email, :password, :password_confirmation, :name,:country_id, :state_id, :city_id, :role_ids, :salt,:reputation, :username, :auth_token
     attr_accessor :password
     before_save :encrypt_password
     has_and_belongs_to_many :roles
@@ -15,19 +15,20 @@ class User < ActiveRecord::Base
     acts_as_voter
     acts_as_liker
      # validates_uniqueness_of :reputation
-    # email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    validates_confirmation_of :password
-    # validates_presence_of :password, :on => :create
-    # validates_presence_of :email
-     # validates_uniqueness_of :email,:presence => {:message => 'email id already exists'}
-  
+    email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+    validates :email,:uniqueness => { :case_sensitive => false },:presence => { :message => " cannot be blank" }
+
+    validates :password, :confirmation => true,:on => :create
+     # validates_uniqueness_of :email,:presence => {:message => 'email id already exists'},:format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+ 
     # def has_voted?(initiative)
     #   # check to see if the user has voted on the story
     #   # something like
     #   !self.initiative.find_by_initiative_id(initiative).nil?
     # end
 
- 
+     before_create { generate_token(:auth_token) }
     def self.authenticate(email, password)
       user = find_by_email(email)
       if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)

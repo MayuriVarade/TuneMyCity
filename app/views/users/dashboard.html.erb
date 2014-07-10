@@ -1,103 +1,137 @@
-
 <% if signed_in?%> 
-
-    <% if (current_user2.role? :Superadmin)%>
-       <%= render 'users/country_state_city.html.erb'%>
-    <% elsif current_user2.role? :Cityadmin %>
-       <%= render 'users/country_state_city.html.erb'%>
-
-        <table>
-      <tr>
-      <th>#</th>
-      <th>Initiative</th>
-      <th>Activate &nbsp; &nbsp;</th>
-      <th>Deactivate</th>
-      </tr>
-
-       <% @initiatives.each.with_index(1) do |initiative,index| %>
-      <tr>
-       <td><%= index %></td>
-       <td><%= initiative.title rescue nil%> &nbsp; &nbsp;</td>
-            
-       <%if (initiative.is_approved == false) %>
-           <td><%= button_to "Approve",{:controller => 'initiatives',:action => 'approve', :id => initiative.id}%></td>
-       <%else%>
-           <td><%= link_to "Approve",{:controller => 'initiatives',:action => 'approve', :id => initiative.id}, :class=> "disabled"%></td>
-       <%end%>
+  <% if (current_user2.role? :Superadmin)%>
+  <%= render 'users/country_state_city.html.erb'%>
+  <div style="font-size:20px;"> <%= link_to 'Add Category', categories_path %></div>
+  <% elsif current_user2.role? :Cityadmin %>
+  <%= render 'users/country_state_city.html.erb'%><br>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+    <th> Sr No.</th>
+      <th><strong>Initiative</strong></th>
+      <th><strong>Activate &nbsp; &nbsp;</strong></th>
+      <th><strong>Deactivate</strong></th>
     
-       <td><%= button_to "Disapprove",{:controller => 'initiatives',:action => 'cancel', :id => initiative.id} ,:onclick => "this.disabled = true"%></td>
-       <td><%#= link_to format_boolean(initiative.is_approved?), {:controller => 'initiatives', :action => 'toggled_status', :id => initiative.id} %></td>
-       <td><%#= link_to format_toogle(initiative.is_approved?), {:controller => 'initiatives', :action => 'deactivate', :id => initiative.id} %></td>
-      </tr>
-       <%end%>
-        </table><br/>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+ <% @initiatives.each.with_index(1) do |initiative,index| %>      <tr>
+        <td><%= index %>&nbsp; &nbsp;</td>
+        <td><%= initiative.initiative_name rescue nil%> &nbsp; &nbsp;</td>
+        <%if (initiative.is_approved == false) %>
+        <td><%= button_to "Approve",{:controller => 'initiatives',:action => 'approve', :id => initiative.id}%></td>
+         <%else%>
+        <td><%= link_to "Approve",{:controller => 'initiatives',:action => 'approve', :id => initiative.id}, :class=> "disabled"%></td>
+         <%end%>
+        <td><%= button_to "Disapprove",{:controller => 'initiatives',:action => 'cancel', :id => initiative.id} ,:onclick => "this.disabled = true"%><br></td>
+    
+        <!-- <td><%#= submit_tag "Select Email",:onclick =>"if(!this.form.checkbox.checked){alert('Please agree to the terms and services.');return false}",:class =>"btn btn-primary" %></td> -->
+        </tr>      
+<% end %>
+</tbody>
+</table>
+  
+
+  </table><br/>
      
-        <table>
- <label class="control-label">City admin Nominations.</label>
-      <tr>
-         <th>#</th>
-        <th>User &nbsp; &nbsp;</th>
-      <th>Email</th>
-      </tr>
-
-       <% @users.each.with_index(1) do |user,index| %>
-         <% if (user.reputation).to_i == 1000%>
-
-      <tr>
-       <td><%#= index %></td>
-       <td><%= user.name rescue nil%>&nbsp; &nbsp;</td>
-      <td><%= user.email %></td>
-      </tr>
-       <%end%>
-      <%end%>
-        </table>
+  <table class="table table-bordered">
+ <label class="control-label" style="font-size: 20px;"><strong>City admin Nominations.</strong></label>
+ <tr>
+ <th> Sr No.</th>
+ <th>User </th>
+ <th>Email</th>
+ </tr>
+ <% @users.each.with_index(1) do |user,index| %>
+ <% if (user.reputation).to_i == 1000%>
+ <tr>
+ <td><%= index %></td>
+ <td><%= user.name rescue nil%></td>
+ <td><%= user.email %></td>
+ </tr>
+ <%end%>
+ <%end%>
+ </table>
 
          
-        <table>
-      <tr>
-         <th>#</th>
-        <th>City Photo</th>
-      <th>Activate/Deactivate</th>
-      </tr>
+<table class="table table-bordered">
+<tr>
+<th> Sr No.</th>
+<th>City Photo</th>
+<th>Activate/Deactivate</th>
+</tr>
 
-       <% @city_photos.each.with_index(1) do |city_photo,index| %>
-      <tr>
-       <td><%= index %></td>
-       <td><%= city_photo.title rescue nil%></td>
-      <td><%= link_to format_boolean(city_photo.is_approved?), {:controller => 'city_photos', :action => 'toggled_status', :id => city_photo.id} %></td>
-      </tr>
-      <%end%>
-        </table>
-       
+<% @city_photos.each.with_index(1) do |city_photo,index| %>
+<tr>
+<td><%= index %></td>
+<td><%= city_photo.title rescue nil%></td>
+<td><%= link_to format_boolean(city_photo.is_approved?), {:controller => 'city_photos', :action => 'toggled_status', :id => city_photo.id} %></td>
+</tr>
+ <%end%>
+</table>
+<%else%>
 
-         
-    <%else%>
+ <script type="text/javascript">
+    jQuery(document).ready(function() {
     
-       <%= render "initiatives/initiatives" %>
-       
-      <%= form_for @user do |f| %>
-      
-         <%= f.label :city_id, "City" %>
-         <%= f.collection_select :city_id, City.order(:city_name),:id, :city_name, include_blank: true %>
-      
-      <%end%>
+     <% if current_user2.country_id.present? and current_user2.state_id.present? and current_user2.city_id.present? %>
+     
+        <% else %>
+           jQuery("#various1").fancybox().trigger('click');
+        <%end%>
+    });
 
-        <% unless current_user2.authenticated_networks.include?("facebook") %>
-         <div id="add-facebook">
-          <%= button_to "Connect Your Facebook Account", authentication_fb_path(:facebook), class: "button" %>
-         </div>
-        <% end %>
-      <% if current_user2.authenticated_networks.include?("facebook") %>
-         <div id="add-facebook">
-          <%= button_to "Connect Your Facebook Account", authentication_fb_path(:facebook), class: "button" %>
-         </div>
-      <% end %>
+
+
+</script> 
+<a id="various1" href="#inline3" title="" ></a>
+<div style="display: none">
+
+<div id="inline3" style="width:400px; height:auto ; overflow:auto; text-align:left">
+<div>
+
+Please Select Your Country State and City
+<%= form_for @user do |f| %>
+<table width="100%" border="0" cellspacing="10" cellpadding="0">
+           <tr>
+                 <td align="right" valign="top">Country :</td>
+                 <td align="left" valign="top">
+                 <%= f.collection_select :country_id, Country.order(:name), :id, :name, include_blank: true %></td>
+           </tr>
+
+           <tr>
+                <td align="right" valign="top">State:</td>
+                <td align="left" valign="top">
+                <%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, include_blank: true %></td>
+          </tr>
+
+          <tr>
+               <td align="right" valign="top">City:</td>
+               <td align="left" valign="top">
+                 <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{:include_blank => true}%></td>
+          </tr>
+         <tr>
+    <td align="right" valign="top">
+      <label>
     
+      <%= f.submit "update" ,:class => "details" %>
+    </label></td>
+  </tr>
+  
+</table>
+<% end %>
+
+</div>
+</div>
+
+</div>
+<%= render "initiatives/initiatives" %>
+<%= render 'city_photos/city_photos'%>
     <%end%>
     <%else%>
     <%= render 'city_photos/city_photos'%>
     <%= render "initiatives/initiatives" %>
-
 <%end%>
 <script type="text/javascript">
 $("#submitbutton").click(

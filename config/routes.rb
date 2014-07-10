@@ -7,7 +7,7 @@ Tunemycity::Application.routes.draw do
   resources :password_resets
   match "/signout" => "sessions#destroy", :as => :signout
   get "log_in" => "sessions#new", :as => "log_in"
-  get "sign_up" => "users#new", :as => "sign_up"
+  get "sign_up" => "users#new"
   get "dashboard" => "users#dashboard", :as => "dashboard"
   match '/auth/:provider/callback', to: 'authentications#create'
   match '/auth/:provider', to: 'authentications#create', :as => "authentication_fb"
@@ -21,6 +21,8 @@ Tunemycity::Application.routes.draw do
 
   get "password_resets/new"
   match '/change_password', :controller => 'users', :action => 'change_password'
+  match "/select" => "users#select"
+
   resources :users
   resources :sessions
   resources :categories
@@ -55,6 +57,7 @@ Tunemycity::Application.routes.draw do
   match '/initiatives/:id/comments', :to => "initiatives#comments"
   match '/city_photos/:id/city_comments', :to => "city_photos#city_comments"
   match '/initiatives/:id/like_count_initiative', :to =>"initiatives#like_count_initiative"
+  match '/users/validations/check_email', :to=>"users#check_email"
   get 'initiatives/index'
   get 'initiatives/edit'
   get 'initiatives/new'

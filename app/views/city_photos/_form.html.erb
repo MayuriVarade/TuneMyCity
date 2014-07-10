@@ -23,13 +23,31 @@
               <%= f.text_field :title,:placeholder=>"Title" %>
               </p>
                <p>
-               <%= f.text_field :city_name,:placeholder=>"City" %>
+                <div class="field">
+
+                     <br>
+                     <div align="left">
+                     Select Country State and City
+                    </div>  
+                     <br>
+            <%= f.collection_select :country_id, Country.order(:name), :id, :name, {prompt: "Country"}, :class=>"alignleft"%><br />
+              </div>
+              <div class="field">
+                <br />
+                <%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {prompt: "State"}, :class=>"alignleft"%><br />
+              </div>
+              <div class="field">
+              <br />
+              <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{prompt: "City"}, :class=>"alignleft"%><br />
+             </div>
+           <br>
               </p>
               <p>
                   <%= f.text_area :about,:placeholder=>"About" %>
                   <%= f.hidden_field :user_id,:value => current_user2.id%>
+                  
               </p>
-              
+              <br>
               <p>
                 <%= f.file_field :image, :class=>"alignleft" %>
               </p>

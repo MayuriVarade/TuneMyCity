@@ -1,9 +1,9 @@
 require 'obscenity/active_model'
 class Initiative < ActiveRecord::Base
-  attr_accessible :about, :address, :is_approved, :is_developed, :latitude, :longitude, :name, :title, :user_id, :image, :initiative_description, :initiative_category, :initiative_name,:good_initiative
+  attr_accessible :about, :address, :is_approved, :is_developed, :latitude, :longitude, :name, :title, :user_id, :image, :initiative_description, :initiative_category, :initiative_name,:good_initiative,:country_id, :state_id, :city_id
   
 
-  has_attached_file :image, styles: {thumb: '150x150>',square: '1200x999#',medium: '200x200>'},
+  has_attached_file :image, styles: {thumb: '150x150>'},
   :storage => :s3, :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :path => "public/attachments/initiatives/:id/:style/:basename.:extension",
                     
@@ -12,13 +12,15 @@ class Initiative < ActiveRecord::Base
                           :medium => "-compose Copy -gravity center -extent 350x350",
                           
                       }
+  do_not_validate_attachment_file_type :image
   # validates_attachment_presence :image
-  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
+  # validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
  
   validates :title,  obscenity: { sanitize: true, replacement: :stars  } 
    geocoded_by :address
    after_validation :geocode
    belongs_to :user
+   belongs_to :city
    has_many :comments
    has_many :initiative_counts
    acts_as_voteable
@@ -26,8 +28,11 @@ class Initiative < ActiveRecord::Base
   
     def likes(id)
     Like.find_all_by_likeable_id(id) rescue nil
-   
     end
+
+    def self.search(query)
+    where("city_name like ?", "%#{query}%")
+    end 
  
     def sum_counts(count)
     count.inject{|sum,x| sum + x }

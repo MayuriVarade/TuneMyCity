@@ -1,12 +1,13 @@
 class InitiativesController < ApplicationController
   
-    before_filter :authenticate, except: [:index,:comments]
+    before_filter :authenticate, except: [:index,:comments, :create]
+    helper_method :sort_column, :sort_direction
   # GET /initiatives
   # GET /initiatives.json
   def index
-    @initiatives = Initiative.order("created_at desc")
-     @user = User.find_by_id(current_user2)
-  
+    @initiatives = Initiative.find_all_by_city_id(current_user2.city_id)
+    @user = User.find_by_id(current_user2)
+
     @hash = Gmaps4rails.build_markers(@initiatives) do |initiative, marker|
       marker.lat initiative.latitude
       marker.lng initiative.longitude
@@ -29,9 +30,10 @@ class InitiativesController < ApplicationController
   # GET /initiatives/1.json
   def show
     @initiative = Initiative.find(params[:id])
-      @user = User.find_by_id(current_user2)
+    @user = User.find_by_id(current_user2)
     
-   
+     # @city= City.find_by_id(@initiative.city_id)
+  # raise @city.inspect
     @hash = Gmaps4rails.build_markers(@initiative) do |initiative, marker|
       marker.lat initiative.latitude
       marker.lng initiative.longitude
@@ -78,7 +80,7 @@ end
   def new
     @initiative = Initiative.new
     @user = User.find_by_id(current_user2)
-  
+    @city = City.all
       respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @initiative }
@@ -102,15 +104,15 @@ end
         initiative['initiative_name'] = params[:initiative_name]
         initiative['latitude'] = params[:latitude]
         initiative['longitude'] = params[:longitude]
+        initiative['user_id'] = params[:user_id]
+        initiative['city_id'] = params[:city_id]
+        initiative['name'] = params[:name]
         initiative['image'] = params[:image]
         @initiative = Initiative.new(initiative)
         @initiative.save!
         render :status =>200 ,:json => @initiative.to_json
        else
         @initiative = Initiative.new(params[:initiative])
-        # raise @initiative.inspect
-        
-        
         respond_to do |format|
             if @initiative.save
               format.html { redirect_to @initiative, notice: 'Initiative was successfully created.' }
@@ -184,8 +186,9 @@ end
 
 def search
   q = params[:q]
-  @initiatives =Initiative.search(title_cont: q).result 
-  @city_photos = CityPhoto.search(title_cont: q).result 
+  @initiatives =Initiative.ransack(initiative_name_cont: q).result 
+  @city_photos = CityPhoto.ransack(title_cont: q).result
+  
   @user = User.find_by_id(current_user2)
 end
 
@@ -247,4 +250,13 @@ end
   private
  def authenticate
       deny_access unless signed_in?
-    end
+end
+
+  
+  def sort_column
+    Initiative.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end

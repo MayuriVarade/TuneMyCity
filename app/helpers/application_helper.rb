@@ -17,12 +17,16 @@ module ApplicationHelper
          end
       end
 
-      # def format_toogle(is_approved)
-      #   if is_approved
-      #    <button type="button" disabled>Click Me!</button>
-      #   end
-      # end
-      
+    
+
+def sortable(column, title = nil)
+  title ||= column.titleize
+  css_class = column == sort_column ? "current #{sort_direction}" : nil
+  direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+  link_to initiati, {:sort => column, :direction => direction}, {:class => css_class}
+end
+
+
       def icon_tick(alt_text='Tick')
 
        build_image_tag("/assets/001_05.png", alt_text)

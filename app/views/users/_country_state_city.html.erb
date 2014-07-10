@@ -1,5 +1,5 @@
  <%= form_for @user do |f| %>
-  
+ <% if (current_user2.role? :Superadmin) && (current_user2.role? :Cityadmin)%>
     <div class="field">
       <%= f.label :country_id %><br />
       <%= f.collection_select :country_id, Country.order(:name), :id, :name, include_blank: true %>
@@ -13,9 +13,22 @@
     <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{:include_blank => true}%><br />
     </div>
     
-     <%= link_to 'Category', categories_path %></br>
+     <%= link_to 'Category', categories_path %>
+     <%else%>
+       <div class="field">
+      <%= f.label :country_id %><br />
+      <%= f.collection_select :country_id, Country.order(:name), :id, :name, include_blank: true %>
+    </div>
+    <div class="field">
+      <%= f.label :state_id, "State or Province" %><br />
+      <%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, include_blank: true %>
+    </div>
+    <div class="field">
+    <%= f.label :city_id, "City" %><br />
+    <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{:include_blank => true}%><br />
+    </div>
   <% end %>
-
+<%end%>
 <!-- 
   <script type= "text/javascript" src = "/assets/countries.js"></script>
   <body>

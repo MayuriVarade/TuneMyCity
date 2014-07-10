@@ -4,28 +4,79 @@ class UsersController < ApplicationController
 	  @user = User.new
       render :layout => 'header'
 	end
-    def admin
-	  @user = User.new
-	end
-	def create
-	  @user = User.new(params[:user])
+ #    def admin
+	#   @user = User.new
+	# end
+def create
+  # unless User.eamil.present?
+    if (params["device"] == "mobile")
+     user = {}
+     user['name'] = params[:name]
+     user['email'] = params[:email]
+     user['password'] = params[:password]
+     user['password_confirmation'] = params[:password_confirmation]
+     user['auth_token'] = params[:auth_token]
+     @user = User.new(user)
+     @user.save!
+     render :status =>200 ,:json => @user.to_json
+    else
+     @user = User.new(params[:user])
+        if @user.save
+        redirect_to log_in_path,:flash => {:notice => "Signed up successfully!"}
+        else
+        render "new"
+        end
+     end
+end
 
-	  if @user.save
-	  redirect_to root_path, :notice => "Signed up!"
-	  else
-	  render "new"
-	  end
-	end
+def show
+     @user = User.find(params[:id])
 
+end
+
+def edit
+    @user = User.find(params[:id])
+end 
+
+ def update
+  @user = User.find(params[:id])
+    if params[:user][:password].blank?
+      params[:user].delete :password
+      params[:user].delete :password_confirmation
+    end
+  
+     if @user.update_attributes(params[:user])
+        # flash[:notice] = "Profile updated."
+        if current_user2.role? :user
+            redirect_to root_path
+        else
+            if current_user2.authentications.find_by_user_id(@user.id)
+              redirect_to ("/dashboard")
+            else
+              redirect_to ("/dashboard?p=#{current_user.id}")
+            end
+        end
+      else
+        @title = "Edit user"
+        render 'edit'
+      end
+  end
 	def dashboard
 		  @user = User.find_by_id(current_user2)
-     @users = User.all
-     # raise @users.inspect
+      @users = User.all
+    # raise (@user).inspect
+       if (signed_in?) and (@user)
+      @initiatives = Initiative.find_all_by_city_id(current_user2.city_id)
+      @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id)
+       else
 	    @initiatives = Initiative.all
-	    @city_photos = CityPhoto.all
+      @city_photos = CityPhoto.all
+    end
 	  
 	end
-
+  def select
+   @user = User.find_by_id(current_user2) 
+  end
 	   #method for change the users password to new password.
    def change_password
 
@@ -53,8 +104,16 @@ class UsersController < ApplicationController
    end
    def check_email
     @user = User.find_by_email(params[:user][:email])
+
       respond_to do |format|
       format.json { render :json => !@user }
+     end
+  end
+
+  def check_name
+    @user = User.find_by_username(params[:user][:name])
+      respond_to do |format|
+          format.json { render :json => !@user }
      end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140624094527) do
+ActiveRecord::Schema.define(:version => 20140628064910) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -31,8 +31,10 @@ ActiveRecord::Schema.define(:version => 20140624094527) do
   create_table "cities", :force => true do |t|
     t.string   "city_name"
     t.integer  "state_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "initiative_id"
+    t.integer  "city_photo_id"
   end
 
   create_table "city_comments", :force => true do |t|
@@ -59,6 +61,9 @@ ActiveRecord::Schema.define(:version => 20140624094527) do
     t.datetime "image_updated_at"
     t.string   "city_name"
     t.integer  "likes"
+    t.integer  "country_id"
+    t.integer  "state_id"
+    t.integer  "city_id"
   end
 
   create_table "comments", :force => true do |t|
@@ -120,6 +125,9 @@ ActiveRecord::Schema.define(:version => 20140624094527) do
     t.integer  "good_initiative"
     t.integer  "ups"
     t.integer  "downs"
+    t.integer  "country_id"
+    t.integer  "state_id"
+    t.integer  "city_id"
   end
 
   add_index "initiatives", ["user_id"], :name => "index_initiatives_on_user_id"
