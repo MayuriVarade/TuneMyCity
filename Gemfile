@@ -22,6 +22,7 @@ gem 'obscenity', '~> 1.0.2'
 gem 'ransack'
 gem 'aws-s3'
 gem 'aws-sdk'
+gem "will_paginate"
 # gem "socialization"
 # Gems used only for assets and not required
 # in production environments by default.

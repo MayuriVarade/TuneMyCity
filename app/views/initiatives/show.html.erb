@@ -64,7 +64,7 @@
                                 <h3 align="left"><%= @initiative.comments.count %> Comments</h3>
 
                                 <ol id="comment-list" class="group">
-                                      <% @initiative.comments.each do |comment| %>
+                                      <% @comments.each do |comment| %>
                                     <li class="comment">
                                         
                                       <div  align="left">  <span class="comment-meta">Posted by <strong><%= comment.user.name rescue nil %></strong>, at <time datetime="2012-08-07"><%= @initiative.created_at.strftime("#{@initiative.created_at.day.ordinalize}  %B, %Y")%></time> 
@@ -81,8 +81,12 @@
 
                                 
                                    <%end%>
-                           
-                                </ol><a class="load-more-comments" href="#">View 38 More Comments...</a>
+
+                           <div align="right">
+                         <li><%= will_paginate @comments %></li>
+                             </div>
+                                </ol>
+                            
                             </div>
                         </div>
                     </div><!-- .box-hold -->

@@ -34,7 +34,7 @@ GEM
       builder
       mime-types
       xml-simple
-    aws-sdk (1.46.0)
+    aws-sdk (1.47.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
@@ -49,10 +49,10 @@ GEM
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
-    coffee-script (2.2.0)
+    coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.7.0)
+    coffee-script-source (1.7.1)
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.1)
@@ -60,7 +60,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     geocoder (1.2.2)
     gmaps4rails (2.1.2)
-    hashie (3.1.0)
+    hashie (3.2.0)
     hike (1.2.3)
     http (0.6.1)
       http_parser.rb (~> 0.6.0)
@@ -186,10 +186,11 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.2.0)
-    tzinfo (0.3.39)
+    tzinfo (0.3.40)
     uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    will_paginate (3.0.7)
     xml-simple (1.1.4)
 
 PLATFORMS
@@ -217,3 +218,4 @@ DEPENDENCIES
   thumbs_up
   twitter
   uglifier (>= 1.0.3)
+  will_paginate

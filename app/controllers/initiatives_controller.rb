@@ -1,5 +1,5 @@
 class InitiativesController < ApplicationController
-  
+    require 'will_paginate/array'
     before_filter :authenticate, except: [:index,:comments, :create]
     helper_method :sort_column, :sort_direction
   # GET /initiatives
@@ -30,6 +30,8 @@ class InitiativesController < ApplicationController
   # GET /initiatives/1.json
   def show
     @initiative = Initiative.find(params[:id])
+    @comments = Comment.paginate(:page => params[:page],:per_page => 4)
+  
     @user = User.find_by_id(current_user2)
     
      # @city= City.find_by_id(@initiative.city_id)
