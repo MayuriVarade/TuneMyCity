@@ -1,4 +1,4 @@
-
+<%= javascript_include_tag "users.js.coffee" %>
 <div class="container">
   <div class="row" style="padding:24px">
     
@@ -8,15 +8,16 @@
     Please Select Your Country State and City</h3>
 
      <div class="field">
+      Country:
             <%= f.collection_select :country_id, Country.order(:name), :id, :name, {prompt: "Country"}%><br />
               </div>
               <div class="left">
                 <br />
-                <%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {prompt: "State"},:style=>"width:82%;"%><br />
+                State:<%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {prompt: "State"},:style=>"width:78%;"%><br />
               </div>
               <div class="left">
               <br /><br />
-              <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{prompt: "City"}%><br />
+             City: <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{prompt: "City"}%><br />
              </div><br /><br />
     <div class="login-footer">
     <div class="row">

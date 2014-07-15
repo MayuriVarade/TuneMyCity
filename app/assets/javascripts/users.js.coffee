@@ -1,5 +1,5 @@
 jQuery ->
-  $('#user_city_id').parent().hide()
+
   $('#user_state_id').parent().hide()
   states = $('#user_state_id').html()
   $('#user_country_id').change ->
@@ -9,10 +9,10 @@ jQuery ->
     if options
       $('#user_state_id').html(options)
       $('#user_state_id').parent().show()
-      $('#user_city_id').parent().show()
+
     else
       $('#user_state_id').empty()
       $('#user_state_id').parent().hide()
-      $('#user_city_id').parent().hide()
+   
 
 

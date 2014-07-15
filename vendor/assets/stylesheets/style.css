@@ -238,7 +238,7 @@ textarea {
   float:left;
   margin-right: 1.125em;
   margin-top: 4px;
-  margin-bottom: 1.125em;
+  /*margin-bottom: 1.125em;*/
 }
 
 .alignright {
