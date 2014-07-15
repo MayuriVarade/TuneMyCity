@@ -112,6 +112,12 @@ required: true,
 },
 "initiative[image]":{
 required: true,
+},
+"initiative[country_id]":{
+required: true,
+},
+"initiative[city_id]":{
+required: true,
 }
 },
 messages: {
@@ -124,6 +130,12 @@ required:"Please enter Title"
  
 "initiative[initiative_description]":{
 required:"Please enter Description"
+},
+"initiative[country_id]":{
+required:"Please select Country"
+},
+"initiative[city_id]":{
+required:"Please select City"
 },
 "initiative[image]":{
 required:"Please Select image"
@@ -146,6 +158,12 @@ required: true,
 "city_photo[about]":{
 required: true,
 },
+"city_photo[country_id]":{
+required: true,
+},
+"city_photo[city_id]":{
+required: true,
+},
 "city_photo[image]":{
 required: true,
 }
@@ -163,7 +181,12 @@ required: "Please enter the City Name"
 },
 "city_photo[about]":{
 required: "Please enter the field"
-
+},
+"city_photo[country_id]":{
+required: "Please select Country"
+},
+"city_photo[city_id]":{
+required: "Please select City"
 },
 "city_photo[image]":{
 required:"Please Select image"
