@@ -1,24 +1,23 @@
 
-
 <div class="container">
-  <div class="row">
+  <div class="row" style="padding:24px">
     
       <%= form_for @user, html: {:class => "form-signin mg-btm"} do |f|  %>
       <h3 class="heading-desc">
    
     Please Select Your Country State and City</h3>
 
-    <div class="main" align="left"> 
-       <td align="right" valign="top">Country :</td>
-        <%= f.collection_select :country_id, Country.order(:name), :id, :name, include_blank: true%>
-           <td align="right" valign="top">State:</td>
-         <%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, include_blank: true%>
-             <td align="right" valign="top">City:</td>
-        <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{:include_blank => true}%>
-       
-       <!--  Are you a business? <a href=""> Get started here</a> -->
-    <span class="clearfix"></span>  
-        </div>
+     <div class="field">
+            <%= f.collection_select :country_id, Country.order(:name), :id, :name, {prompt: "Country"}%><br />
+              </div>
+              <div class="left">
+                <br />
+                <%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {prompt: "State"},:style=>"width:82%;"%><br />
+              </div>
+              <div class="left">
+              <br /><br />
+              <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{prompt: "City"}%><br />
+             </div><br /><br />
     <div class="login-footer">
     <div class="row">
 
@@ -34,7 +33,8 @@
   </div>
 </div>
 
-        <style type="text/css">
+
+<style type="text/css">
 
 .form-signin {
   max-width: 400px; 

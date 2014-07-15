@@ -1,4 +1,14 @@
  <%= javascript_include_tag "jquery-1.5.2.min","jquery.validate.min","validation" %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+     <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 <div class="container">
   <div class="row">
     

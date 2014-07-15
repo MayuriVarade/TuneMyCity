@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  layout :custom_layout
 
 	def new
 	  @user = User.new
-      render :layout => 'header'
+     
 	end
  #    def admin
 	#   @user = User.new
@@ -30,12 +31,12 @@ def create
 end
 
 def show
-     @user = User.find(params[:id])
-
+@user = User.find(params[:id])
 end
 
 def edit
     @user = User.find(params[:id])
+
 end 
 
  def update
@@ -113,6 +114,7 @@ end
       respond_to do |format|
       format.json { render :json => !@user }
      end
+
   end
 
   def check_name
@@ -121,4 +123,21 @@ end
           format.json { render :json => !@user }
      end
   end
+
+  def custom_layout
+        case action_name
+         when "create"
+          "header"
+           when "new"
+          "header"
+           when "show"
+          "header"
+           when "select"
+            "application"
+             
+         else
+          "application"
+        end
+    end
+    
 end

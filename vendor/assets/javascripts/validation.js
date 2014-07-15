@@ -1,40 +1,40 @@
 jQuery(document).ready(function() {
-//   jQuery("#sign_up").validate({
-// errorElement:'div',
-// rules: {
-// "user[name]":{
-// required: true
-// },
+  jQuery("#sign_up").validate({
+errorElement:'div',
+rules: {
+"user[name]":{
+required: true
+},
 
-// "user[email]":{
-// required: true,
-// // remote:"/users/validations/check_email"
-// },
+"user[email]":{
+required: true,
+// remote:"/users/validations/check_email"
+},
 
-// "user[password]":{
-// required: true,
-// },  
-// "user[password_confirmation]":{
-// required:true
-// }
-// },
-// messages: {
-// "user[name]":{
-// required: "Please enter the name",
-// remote:"name already exists"
-//                      },
-// "user[email]":{
-// required: "Please enter email address",
-// remote:"email id already exists"
-// },
-// "user[password]":{
-// required: "Please enter password"
-// },
-// "user[password_confirmation]":{
-// required:"Please enter confirmation password"
-// }
-// }
-// });
+"user[password]":{
+required: true,
+},  
+"user[password_confirmation]":{
+required:true
+}
+},
+messages: {
+"user[name]":{
+required: "Please enter the name",
+remote:"name already exists"
+                     },
+"user[email]":{
+required: "Please enter email address",
+remote:"email id already exists"
+},
+"user[password]":{
+required: "Please enter password"
+},
+"user[password_confirmation]":{
+required:"Please enter confirmation password"
+}
+}
+});
 
 jQuery("#log_in").validate({
 errorElement:'div',
