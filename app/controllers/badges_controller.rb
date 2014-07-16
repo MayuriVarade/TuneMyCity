@@ -1,4 +1,5 @@
 class BadgesController < ApplicationController
+	  before_filter :authenticate
 def index
     @badges = Badge.all
     @user = User.find_by_id(current_user2)
