@@ -62,7 +62,7 @@
                                    <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to 'Good Initiative',like_initiative_initiatives_path(:id =>initiative.id),:method => "post",:remote => true,:id => "like_initiative"%>&nbsp;</span>
                                    </a>
                                 <a><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
-                               </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">i</span>
+                               </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">i</span>
                                 
                              <!--   <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a> -->
                                 </div>
@@ -70,7 +70,7 @@
                            
                              <% if current_user2 == initiative.user %>
                             <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
-                            <td><%= link_to 'Destroy', initiative_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                             <%end%>
                         </article>
                    <%#end%>
