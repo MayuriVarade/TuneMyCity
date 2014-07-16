@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
   
-  def show
-    @user = User.find_by_id(current_user2)
-    redirect_to initiatives_url
-  end
+  # def show
+  #   @user = User.find_by_id(current_user2)
+  #   redirect_to initiatives_url
+  # end
 
 	def create
 		if params["device"] == "mobile" 
@@ -26,15 +26,15 @@ class CommentsController < ApplicationController
         end        
      end
 
-     def destroy
-      @comment = Comment.find(params[:id])
-      @comment.destroy
+  #    def destroy
+  #     @comment = Comment.find(params[:id])
+  #     @comment.destroy
 
-      respond_to do |format|
-      format.html { redirect_to initiatives_url }
-      format.json { head :no_content }
-    end
-  end
+  #     respond_to do |format|
+  #     format.html { redirect_to initiatives_url }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
 end
 
