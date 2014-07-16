@@ -15,7 +15,7 @@
 
 
     admin = User.create(:name => 'Cityadmin', :email=> 'cityadmin@cityadmin.com', :password => 'admin123')
-    admin.roles =   Role.where(:name =>"Cityadmin")
+    admin.roles = Role.where(:name =>"Cityadmin")
     admin.save
    require 'csv'
 

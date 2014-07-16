@@ -3,9 +3,12 @@
 <% if signed_in?%> 
   <% if (current_user2.role? :Superadmin)%>
   <%= render 'users/country_state_city.html.erb'%>
+
+<div style="font-size:20px;"><%= link_to 'New Badge', new_badge_path %></div>
   <div style="font-size:20px;"> <%= link_to 'Add Category', categories_path %></div>
   <% elsif current_user2.role? :Cityadmin %>
   <%= render 'users/country_state_city.html.erb'%><br>
+
 <table class="table table-bordered">
   <thead>
     <tr>

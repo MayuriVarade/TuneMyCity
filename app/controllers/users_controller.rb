@@ -65,6 +65,7 @@ end
 	def dashboard
 		  @user = User.find_by_id(current_user2)
       @users = User.all
+      @bagde = Badge.all
     # raise (@user).inspect
 
 # raise (current_user2.role? :Cityadmin).inspect

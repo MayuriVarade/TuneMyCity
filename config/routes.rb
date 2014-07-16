@@ -24,6 +24,7 @@ Tunemycity::Application.routes.draw do
   match "/select" => "users#select"
 
   resources :users
+  resources :badges
   resources :sessions
   resources :categories
   resources :city_photos do 

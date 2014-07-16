@@ -1,0 +1,32 @@
+ <%# if @initiative.is_approved %>
+<h1>Listing bages</h1>
+
+<table>
+  <tr>
+  
+    <th>Image</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @badges.each do |badge| %>
+
+  <tr>
+
+    <td><%= image_tag badge.image.url(:thumb) %></td>
+    <td><%= link_to 'Show', badge %></td>
+    <td><%= link_to 'Edit', edit_badge_path(badge) %></td>
+      
+    <td><%= link_to 'Destroy', badge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+  
+<% end %>
+</table>
+<%#else%>
+
+
+<%#end%>
+<br />
+
+<%= link_to 'New Badge', new_badge_path %>
