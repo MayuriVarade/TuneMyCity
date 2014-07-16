@@ -51,10 +51,10 @@
 
                         <div class="box post-comments">
                             <div class="box-content">
-                                <h3 align="left"><%= @city_photo.city_comments.count %> Comments</h3>
+                                <h3 align="left"><%= @city_comments.count %> Comments</h3>
 
                                 <ol id="comment-list" class="group">
-                                      <% @city_photo.city_comments.each do |city_comment| %>
+                                      <% @city_comments.each do |city_comment| %>
                                     <li class="comment">
                                       <div  align="left">  <span class="comment-meta">Posted by <strong><%= city_comment.user.name %></strong>, at <time datetime="2012-08-07"><%= @city_photo.created_at.strftime("#{@city_photo.created_at.day.ordinalize}  %B, %Y")%></time> 
                                          </div> 
@@ -70,8 +70,10 @@
 
                                 
                                    <%end%>
-                           
-                                </ol><a class="load-more-comments" href="#">View 38 More Comments...</a>
+                            <div align="right">
+                         <li><%= will_paginate @city_comments %></li>
+                             </div>
+                                </ol>
                             </div>
                         </div>
                     </div><!-- .box-hold -->
