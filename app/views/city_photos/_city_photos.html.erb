@@ -57,9 +57,9 @@
                                 <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to (image_tag "like.png"),like_city_photo_city_photos_path(:id =>city_photo.id),:method => "post",:remote => true,:id => "like_city_photo"%>&nbsp;</span>
                                 </a>
                                 <a val= "<%=city_photo.id %>"><%= link_to Like.where(:likeable_type=>"CityPhoto",:likeable_id=>city_photo.id).sum(:count) ,like_count_city_photos_path(:id =>city_photo.id), :id=>"like_count",:method => "get",:remote=> true %>
-                               </a>
+                               </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">c</span>
                                
-                                <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a>
+                               
                                 </div>
                             </div>
                            

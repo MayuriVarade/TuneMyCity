@@ -31,7 +31,7 @@ class InitiativesController < ApplicationController
   def show
     @initiative = Initiative.find(params[:id])
     @comments = Comment.where(:initiative_id => @initiative).paginate(:page => params[:page],:per_page => 4)
-  
+    # raise @comments.inspect
     @user = User.find_by_id(current_user2)
     
      # @city= City.find_by_id(@initiative.city_id)

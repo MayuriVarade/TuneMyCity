@@ -19,20 +19,12 @@
                               </div>
                             </div><!-- .entry-intro -->
 
-                            <figure class="entry-image"><a href="<%= @initiative.image.url %>" data-lightbox="fancybox" class="entry-image"><%= image_tag @initiative.image.url%></a></figure>
+                            <figure class="entry-image"><a data-lightbox="fancybox" class="entry-image"><%= image_tag @initiative.image.url%></a></figure>
                               
                             <div class="entry-content">
-                               
-
-                                <h2 align="left"><%= @initiative.initiative_category%></h2>
-                                     
-
-                              
-
-                                <p align="left"> <%= @initiative.initiative_description %></p>
-
-                                
-                            </div>
+                                 <h2 align="left"><%= @initiative.initiative_category%></h2>
+                                 <p align="left"> <%= @initiative.initiative_description %></p>
+                           </div>
 
                             <div class="social-share"></div>
                         </article>
@@ -75,8 +67,10 @@
                                             <div class="comment-copy">
                                            <p align="left"><%= comment.body %></p>
                                             </div>
+
+                                            <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
                                         </div>
-                                      
+                            
                                     </li>
 
                                 

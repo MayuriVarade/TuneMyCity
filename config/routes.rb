@@ -3,7 +3,7 @@ Tunemycity::Application.routes.draw do
   resources :city_comments
 
 
-  resources :comments
+ resources :comments
   resources :password_resets
   match "/signout" => "sessions#destroy", :as => :signout
   get "log_in" => "sessions#new", :as => "log_in"
@@ -52,7 +52,7 @@ Tunemycity::Application.routes.draw do
       get :like_count_initiative
     end
 
-    resources :comments, :only => [:create]
+    resources :comments
   end
   match '/search' => 'initiatives#search'
   match '/initiatives/:id/comments', :to => "initiatives#comments"
