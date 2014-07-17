@@ -117,7 +117,7 @@ end
         @initiative = Initiative.new(params[:initiative])
         respond_to do |format|
             if @initiative.save
-              format.html { redirect_to @initiative, notice: 'Initiative was successfully created.' }
+              format.html { redirect_to @initiative, notice: 'Initiative was successfully created.Please wait for the approval,soon your initiative will be approved.' }
               format.json { render json: @initiative, status: :created, location: @initiative }
             else
               format.html { render action: "new" }

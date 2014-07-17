@@ -16,6 +16,7 @@ class CityPhoto < ActiveRecord::Base
   belongs_to :user
   has_many :cities
   validates :title,  obscenity: { sanitize: true, replacement: :stars  } 
+ # validates_uniqueness_of :title,:presence => {:message => 'Title already exists'}
   acts_as_likeable
   
     def likes(id)
