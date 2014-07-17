@@ -30,7 +30,7 @@ class InitiativesController < ApplicationController
   # GET /initiatives/1.json
   def show
     @initiative = Initiative.find(params[:id])
-    @comments = Comment.where(:initiative_id => @initiative).paginate(:page => params[:page],:per_page => 4)
+    @comments = Comment.where(:initiative_id => @initiative).paginate(:page => params[:page],:per_page => 4,:order => "created_at DESC")
     # raise @comments.inspect
     @user = User.find_by_id(current_user2)
     

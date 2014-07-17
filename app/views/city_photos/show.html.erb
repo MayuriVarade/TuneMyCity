@@ -64,6 +64,9 @@
                                             <div class="comment-copy">
                                            <p align="left"><%= city_comment.body %></p>
                                             </div>
+                                            <% if current_user2 == city_comment.user %>
+                                            <%= link_to 'Delete', city_comment, method: :delete, data: { confirm: 'Are you sure?' },:class => 'btn btn-info',:style=>"float:right;padding: 4px 21px;"%>
+                                            <%end%>
                                         </div>
                                       
                                     </li>

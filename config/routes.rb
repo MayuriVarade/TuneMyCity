@@ -28,7 +28,7 @@ Tunemycity::Application.routes.draw do
   resources :sessions
   resources :categories
   resources :city_photos do 
-  resources :city_comments, :only => [:create]
+  resources :city_comments, :only => [:create, :show]
      collection do
      
       post :like_city_photo
@@ -53,7 +53,7 @@ Tunemycity::Application.routes.draw do
     end
 
     resources :comments, :only => [:create, :show]
-    
+
   end
   match '/search' => 'initiatives#search'
   match '/initiatives/:id/comments', :to => "initiatives#comments"

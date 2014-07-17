@@ -19,7 +19,7 @@ class CityPhotosController < ApplicationController
   # GET /city_photos/1.json
   def show
     @city_photo = CityPhoto.find(params[:id])
-    @city_comments = CityComment.where(:city_photo_id => @city_photo).paginate(:page => params[:page],:per_page => 4)
+    @city_comments = CityComment.where(:city_photo_id => @city_photo).paginate(:page => params[:page],:per_page => 4,:order => "created_at DESC")
     @user = User.find_by_id(current_user2)
     respond_to do |format|
       format.html # show.html.erb

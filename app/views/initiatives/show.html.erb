@@ -68,7 +68,10 @@
                                            <p align="left"><%= comment.body %></p>
                                             </div>
 
-                                            <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+                                             <% if current_user2 == comment.user %>
+                                            <%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' },:class => 'btn btn-info',:style=>"float:right;padding: 4px 21px;"%>
+
+                                            <%end%>
                                         </div>
                             
                                     </li>
