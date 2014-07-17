@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+  
+  def show
+    @user = User.find_by_id(current_user2)
+    redirect_to :back
+  end
 
 	def create
 		if params["device"] == "mobile" 
@@ -21,7 +26,12 @@ class CommentsController < ApplicationController
         end        
      end
 
- 
+     def destroy
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+
+      redirect_to :back
+  end
 
 end
 

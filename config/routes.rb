@@ -52,7 +52,8 @@ Tunemycity::Application.routes.draw do
       get :like_count_initiative
     end
 
-    resources :comments, :only => [:create]
+    resources :comments, :only => [:create, :show]
+    
   end
   match '/search' => 'initiatives#search'
   match '/initiatives/:id/comments', :to => "initiatives#comments"
