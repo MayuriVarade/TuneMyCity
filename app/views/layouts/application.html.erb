@@ -54,7 +54,7 @@
             
                  <% if (signed_in?)  %>
 
-                  <% if (@user.reputation).to_i == 10%>
+                  <% if (@user.reputation).to_i == 100%>
   
             <h1><a href="http://www.facebook.com/sharer.php?s= 100&amp;p[title]=<%=current_user2.name%>&amp;p[url]=http://tunemycity.herokuapp.com/badges/1&amp;p[images][0]=&amp;p[summary]=<%= current_user2.email%> "target="_blank"><img src="/assets/badge-gold-icon.png" alt=""></a></h1>
                     <%elsif (@user.reputation).to_i == 500 %>

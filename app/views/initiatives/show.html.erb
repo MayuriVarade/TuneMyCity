@@ -7,7 +7,7 @@
                     <div class="box-hold group">
                         <article class="entry box format-standard">
                             <div class="entry-intro">
-                                <h1 align="left"><%= @initiative.title rescue nil %></h1>
+                                <h1 align="left"><%= @initiative.initiative_name rescue nil %></h1>
                                 <div align="left"><span class="entry-meta">Posted by <strong><%= @initiative.user.name rescue nil %></strong>, at <time datetime="2012-08-07"><%= @initiative.created_at.strftime("#{@initiative.created_at.day.ordinalize}  %B, %Y")%></time>
                                 </div>
                                 </span> 
