@@ -1,0 +1,7 @@
+$('#city_photos').append('<%= j render(@city_photos) %>');
+<% if @city_photos.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@city_photos) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+<% sleep 1 %>

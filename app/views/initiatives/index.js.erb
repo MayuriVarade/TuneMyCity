@@ -1,0 +1,7 @@
+$('#initiatives').append('<%= j render(@initiatives) %>');
+<% if @initiatives.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+<% sleep 1 %>
