@@ -1,4 +1,5 @@
-<%= javascript_include_tag "users.js.coffee","common.js.coffee","knockout.2.2.1.js" %>
+<%= javascript_include_tag "users.js.coffee"%>
+
 <div class="container">
   <div class="row" style="padding:24px">
     
@@ -17,7 +18,7 @@
               </div>
               <div align="left" style="display: block; margin-left: 7%;" class="left">
               <br /><br />
-       
+
              City: <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{prompt: "City"}%><br />
              </div><br /><br />
     <div class="login-footer">
