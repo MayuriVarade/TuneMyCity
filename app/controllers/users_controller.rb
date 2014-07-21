@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   layout :custom_layout
-
+ require 'will_paginate/array'
 	def new
 	  @user = User.new
      
@@ -70,7 +70,7 @@ end
 
 # raise (current_user2.role? :Cityadmin).inspect
        if (signed_in?) and (current_user2.role? :Cityadmin)
-         @initiatives = Initiative.all
+         @initiatives = Initiative.paginate(:page => params[:page],:per_page => 10,:order => "created_at DESC")
          @city_photos = CityPhoto.all
        elsif (signed_in?) and (@user)
       @initiatives = Initiative.find_all_by_city_id(current_user2.city_id)
@@ -83,6 +83,8 @@ end
 	end
   def select
    @user = User.find_by_id(current_user2) 
+   @country =Country.all
+   @city = City.all
   end
 	   #method for change the users password to new password.
    def change_password

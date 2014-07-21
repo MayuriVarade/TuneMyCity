@@ -1,4 +1,4 @@
-<%= javascript_include_tag "users.js.coffee","common.js.coffee" %>
+<%= javascript_include_tag "users.js.coffee","common.js.coffee","knockout.2.2.1.js" %>
 <div class="container">
   <div class="row" style="padding:24px">
     
@@ -15,8 +15,9 @@
                 <br />
                 State:<%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {prompt: "State"},:style=>"width:78%;"%><br />
               </div>
-              <div class="left">
+              <div align="left" style="display: block; margin-left: 7%;" class="left">
               <br /><br />
+       
              City: <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{prompt: "City"}%><br />
              </div><br /><br />
     <div class="login-footer">
@@ -33,7 +34,9 @@
     
   </div>
 </div>
-
+<%#@country.each do |country|%>
+<%#= City.find_by_city_name(:city_name).city_name%>
+<%#end%>
 
 <style type="text/css">
 
@@ -111,6 +114,54 @@
 .mg-btm{
   margin-bottom:20px;
 }
+</style>
+<!-- <div>
+    <select id="make" data-bind="options: makes, value: selectedMake, optionsText : 'name', optionsValue : 'id', optionsCaption : 'Select your make'"></select><br/>
+    <select id="type" data-bind="options: carTypes, value: selectedType, optionsText : 'name', optionsValue : 'id', optionsCaption : 'Select your type'"></select><br/>
+    <select id="model" data-bind="options: carModels, value:selectedModel, optionsText: 'name', optionsValue : 'id', optionsCaption:'Select your model'"></select>
+</div> -->
+<%#@country.each do |country|%>
+<script type="text/javascript">
+// var viewModel = function(){
+//     var self = this;
+//     self.makes = [
+//         {id: user_country_id, name: '<%#= country.name%>'}
+      
+//     ];
+ 
+//     self.types = [
+//         {id: user_state_id, make:user_country_id, name:'<%#= State.find(@user.state_id).name%>'}
+       
+//     ];
+ 
+//     self.models = [
+//         {id:user_city_id, make:user_country_id,type: user_state_id, name: '<%#= City.find(@user.city_id).city_name%>'}
+        
+//     ];
+ 
+//     self.selectedMake = ko.observable();
+//     self.selectedType = ko.observable();
+//     self.selectedModel = ko.observable();
+ 
+//     self.carTypes = ko.computed(function(){
+//         return ko.utils.arrayFilter(self.types, function(item){
+//             return item.make === self.selectedMake();
+//         });
+//     });
+    
+//      self.carModels = ko.computed(function(){
+//         return ko.utils.arrayFilter(self.models, function(item){
+//             return item.make === self.selectedMake() && item.type === self.selectedType();
+//         });
+//     });
+
+ 
+// };
+
+// var model = new viewModel();
 
 
-        </style>
+// ko.applyBindings(model);
+
+// </script>
+<%#end%>

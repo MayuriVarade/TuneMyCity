@@ -5,7 +5,7 @@ class InitiativesController < ApplicationController
   # GET /initiatives
   # GET /initiatives.json
   def index
-    @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 4,:order => "created_at DESC")
+    @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 5,:order => "created_at DESC")
     @user = User.find_by_id(current_user2)
 
     @hash = Gmaps4rails.build_markers(@initiatives) do |initiative, marker|

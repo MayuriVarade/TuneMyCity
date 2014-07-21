@@ -4,7 +4,7 @@ class CityPhotosController < ApplicationController
   # GET /city_photos
   # GET /city_photos.json
   def index
-    @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 4,:order => "created_at DESC")
+    @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 5,:order => "created_at DESC")
      @user = User.find_by_id(current_user2)
 
      @city_photos1 = Hash["city_photo" => @city_photos]

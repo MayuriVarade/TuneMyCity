@@ -14,6 +14,8 @@
     <tr>
     <th> Sr No.</th>
       <th><strong>Initiative</strong></th>
+      <th><strong>Image</strong></th>
+      <th><strong>Descripttion</strong></th>
       <th><strong>Activate &nbsp; &nbsp;</strong></th>
       <th><strong>Deactivate</strong></th>
     
@@ -22,9 +24,11 @@
   </thead>
 
   <tbody>
- <% @initiatives.each.with_index(1) do |initiative,index| %>      <tr>
+ <% @initiatives.each.with_index(1) do |initiative,index| %> <tr>
         <td><%= index %>&nbsp; &nbsp;</td>
         <td><%= initiative.initiative_name rescue nil%> &nbsp; &nbsp;</td>
+          <td><%= image_tag initiative.image.url(:thumb)%> &nbsp; &nbsp;</td>
+           <td><%= initiative.initiative_description %></td>
         <%if (initiative.is_approved == false) %>
         <td><%= button_to "Approve",{:controller => 'initiatives',:action => 'approve', :id => initiative.id}%></td>
          <%else%>
@@ -37,7 +41,7 @@
 <% end %>
 </tbody>
 </table>
-  
+  <%= will_paginate @initiatives %>
 
   </table><br/>
      
@@ -61,20 +65,20 @@
 
          
 <table class="table table-bordered">
-<tr>
+<!-- <tr>
 <th> Sr No.</th>
 <th>City Photo</th>
 <th>Activate/Deactivate</th>
 </tr>
 
-<% @city_photos.each.with_index(1) do |city_photo,index| %>
+<%# @city_photos.each.with_index(1) do |city_photo,index| %>
 <tr>
-<td><%= index %></td>
-<td><%= city_photo.title rescue nil%></td>
-<td><%= link_to format_boolean(city_photo.is_approved?), {:controller => 'city_photos', :action => 'toggled_status', :id => city_photo.id} %></td>
+<td><%#= index %></td>
+<td><%#= city_photo.title rescue nil%></td>
+<td><%#= link_to format_boolean(city_photo.is_approved?), {:controller => 'city_photos', :action => 'toggled_status', :id => city_photo.id} %></td>
 </tr>
- <%end%>
-</table>
+ <%#end%> -->
+</table> 
 <%else%>
 
  <script type="text/javascript">
@@ -134,10 +138,11 @@ Please Select Your Country State and City
   <%= render "users/common" %>
     <%end%>
     <%else%>
-   
-    <%= render "users/common" %>
 
-<%end%>
+
+  <%= render "users/common" %>
+
+  <%end%>
 <script type="text/javascript">
 $("#submitbutton").click(
    function() {
@@ -148,6 +153,8 @@ $("#submitbutton").click(
 $('#mylink').click(function(e){
   e.preventDefault();
 });
+
+
 </script>
 <style>
 .disabled {
