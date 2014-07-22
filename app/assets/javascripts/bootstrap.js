@@ -153,9 +153,10 @@
  /* ALERT DATA-API
   * ============== */
 
-  $(document).on('click.alert.data-api', dismiss, Alert.prototype.close)
+//   $(document).on('click.alert.data-api', dismiss, Alert.prototype.close)
 
-}(window.jQuery);/* ============================================================
+// }(window.jQuery);
+/* ============================================================
  * bootstrap-button.js v2.3.2
  * http://getbootstrap.com/2.3.2/javascript.html#buttons
  * ============================================================

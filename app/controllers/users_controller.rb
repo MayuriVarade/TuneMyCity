@@ -3,7 +3,7 @@ class UsersController < ApplicationController
  require 'will_paginate/array'
 	def new
 	  @user = User.new
-     
+    @countries = Country.all 
 	end
  #    def admin
 	#   @user = User.new
@@ -25,7 +25,8 @@ def create
         if @user.save
         redirect_to log_in_path,:flash => {:notice => "Signed up successfully!"}
         else
-        render "new"
+          @countries = Country.all
+          render "new"
         end
      end
 end
@@ -36,7 +37,7 @@ end
 
 def edit
     @user = User.find(params[:id])
-
+    @countries = Country.all
 end 
 
  def update
@@ -62,6 +63,22 @@ end
         render 'edit'
       end
   end
+
+  def add_states
+    @country = Country.find(params[:country_id], :joins => :states)
+
+  respond_to do |format|
+    format.js
+  end
+  end
+
+  def add_cities
+    @state = State.find(params[:state_id], :joins => :cities)
+
+    respond_to do |format|
+    format.js
+  end
+  end
 	def dashboard
 		  @user = User.find_by_id(current_user2)
       @users = User.all
@@ -83,8 +100,8 @@ end
 	end
   def select
    @user = User.find_by_id(current_user2) 
-   @country =Country.all
-   @city = City.all
+    @countries = Country.all
+   # @city = City.all
   end
 	   #method for change the users password to new password.
    def change_password

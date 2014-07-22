@@ -17,7 +17,7 @@
                 State:<%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {prompt: "State"},:style=>"width:78%;"%><br />
               </div>
               <div align="left" style="display: block; margin-left: 7%;" class="left">
-              <br /><br />
+              <br/>
 
              City: <%= f.grouped_collection_select :city_id, State.order(:name),:cities, :name, :id, :city_name,{prompt: "City"}%><br />
              </div><br /><br />
