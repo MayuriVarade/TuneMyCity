@@ -36,7 +36,7 @@
                      Select Country State and City
                     </div>  
                      <br>
-            <%= f.collection_select :country_id, Country.order(:name), :id, :name, {prompt: "Country"}, :class=>"alignleft"%><br />
+            <%= f.collection_select :country_id, Country.order(:name), :id, :name, {prompt: " --Select Country--"}, :class=>"alignleft"%><br />
               </div>
               <div class="field">
                 <br />

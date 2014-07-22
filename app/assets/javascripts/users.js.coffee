@@ -6,7 +6,6 @@ jQuery ->
   $('#user_country_id').change ->
     country = $('#user_country_id :selected').text()
     escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
-    $('#user_state_id').change ->
     # state = $('#user_state_id :selected').text()
     # escaped_state = state.replace()
     options = $(states).filter("optgroup[label='#{escaped_country}']").html()

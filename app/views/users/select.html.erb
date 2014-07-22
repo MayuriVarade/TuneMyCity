@@ -10,11 +10,12 @@
 
      <div class="field">
       Country:
-            <%= f.collection_select :country_id, Country.order(:name), :id, :name, {prompt: "Country"}%><br />
+            <%= f.collection_select :country_id, Country.order(:name), :id, :name,{:prompt => true}%><br />
+
               </div>
               <div class="left">
                 <br />
-                State:<%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {prompt: "State"},:style=>"width:78%;"%><br />
+                State:<%= f.grouped_collection_select :state_id, Country.order(:name), :states, :name, :id, :name, {:include_blank => 'Please Select'},:style=>"width:78%;"%><br />
               </div>
               <div align="left" style="display: block; margin-left: 7%;" class="left">
               <br/>

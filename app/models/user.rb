@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
     has_many :city_photos
     has_many :likes
     has_many :comments
-    # validates :country_id, :presence => true
-    # validates :state_id, :presence => true
-    # validates :city_id, :presence => true
+    validates :country_id, :presence => true
+    validates :state_id, :presence => true
+    validates :city_id, :presence => true
     acts_as_voter
     acts_as_liker
      # validates_uniqueness_of :reputation

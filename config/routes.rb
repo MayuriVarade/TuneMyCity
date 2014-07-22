@@ -23,12 +23,8 @@ Tunemycity::Application.routes.draw do
   match '/change_password', :controller => 'users', :action => 'change_password'
   match "/select" => "users#select"
 
-  resources :users do
-    collection do
-    get :add_states
-    get :add_cities
-  end
-  end
+  resources :users
+  
   resources :badges
   resources :sessions
   resources :categories
