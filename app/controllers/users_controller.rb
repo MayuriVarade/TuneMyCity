@@ -54,7 +54,7 @@ end
             if current_user2.authentications.find_by_user_id(@user.id)
               redirect_to ("/dashboard")
             else
-              redirect_to ("/dashboard?p=#{current_user.id}")
+              redirect_to ("/dashboard")
             end
         end
       else
