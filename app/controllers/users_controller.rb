@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
   layout :custom_layout
  require 'will_paginate/array'
-	def new
-	  @user = User.new
-    # @countries = Country.all 
-	end
+  def new
+    @user = User.new
+     
+  end
  #    def admin
-	#   @user = User.new
-	# end
+  #   @user = User.new
+  # end
 def create
   # unless User.eamil.present?
     if (params["device"] == "mobile")
@@ -25,7 +25,7 @@ def create
         if @user.save
         redirect_to log_in_path,:flash => {:notice => "Signed up successfully!"}
         else
-          render "new"
+        render "new"
         end
      end
 end
@@ -36,7 +36,7 @@ end
 
 def edit
     @user = User.find(params[:id])
-    # @countries = Country.all
+
 end 
 
  def update
@@ -62,24 +62,8 @@ end
         render 'edit'
       end
   end
-
-  # def add_states
-  #   @country = Country.find(params[:country_id], :joins => :states)
-
-  # respond_to do |format|
-  #   format.js
-  # end
-  # end
-
-  # def add_cities
-  #   @state = State.find(params[:state_id], :joins => :cities)
-
-  #   respond_to do |format|
-  #   format.js
-  # end
-  # end
-	def dashboard
-		  @user = User.find_by_id(current_user2)
+  def dashboard
+      @user = User.find_by_id(current_user2)
       @users = User.all
       @bagde = Badge.all
     # raise (@user).inspect
@@ -92,17 +76,17 @@ end
       @initiatives = Initiative.find_all_by_city_id(current_user2.city_id)
       @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id)
        else
-	    @initiatives = Initiative.all
+      @initiatives = Initiative.all
       @city_photos = CityPhoto.all
     end
-	  
-	end
+    
+  end
   def select
    @user = User.find_by_id(current_user2) 
-    @countries = Country.all
-   # @city = City.all
+   @country =Country.all
+   @city = City.all
   end
-	   #method for change the users password to new password.
+     #method for change the users password to new password.
    def change_password
 
     @user = User.find(current_user.id)
