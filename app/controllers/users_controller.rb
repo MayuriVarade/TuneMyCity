@@ -3,7 +3,7 @@ class UsersController < ApplicationController
  require 'will_paginate/array'
 	def new
 	  @user = User.new
-    @countries = Country.all 
+    # @countries = Country.all 
 	end
  #    def admin
 	#   @user = User.new
@@ -25,7 +25,6 @@ def create
         if @user.save
         redirect_to log_in_path,:flash => {:notice => "Signed up successfully!"}
         else
-          @countries = Country.all
           render "new"
         end
      end
@@ -37,7 +36,7 @@ end
 
 def edit
     @user = User.find(params[:id])
-    @countries = Country.all
+    # @countries = Country.all
 end 
 
  def update
@@ -64,21 +63,21 @@ end
       end
   end
 
-  def add_states
-    @country = Country.find(params[:country_id], :joins => :states)
+  # def add_states
+  #   @country = Country.find(params[:country_id], :joins => :states)
 
-  respond_to do |format|
-    format.js
-  end
-  end
+  # respond_to do |format|
+  #   format.js
+  # end
+  # end
 
-  def add_cities
-    @state = State.find(params[:state_id], :joins => :cities)
+  # def add_cities
+  #   @state = State.find(params[:state_id], :joins => :cities)
 
-    respond_to do |format|
-    format.js
-  end
-  end
+  #   respond_to do |format|
+  #   format.js
+  # end
+  # end
 	def dashboard
 		  @user = User.find_by_id(current_user2)
       @users = User.all
