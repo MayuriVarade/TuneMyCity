@@ -52,7 +52,7 @@
                                 <a class="comments-no" <%= link_to "",city_photo%><%= city_photo.city_comments.count %></a> &nbsp;
                                 <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to (image_tag "like.png"),like_city_photo_city_photos_path(:id =>city_photo.id),:method => "post",:remote => true,:id => "like_city_photo"%>&nbsp;</span>
                                 </a>
-                                <a val= "<%=city_photo.id %>"><%= link_to Like.where(:likeable_type=>"CityPhoto",:likeable_id=>city_photo.id).sum(:count) ,like_count_city_photos_path(:id =>city_photo.id), :id=>"like_count",:method => "get",:remote=> true %>
+                                <a val= "<%=city_photo.id %>"><%= link_to Like.where(:likeable_type=>"CityPhoto",:likeable_id=>city_photo.id).sum(:count),like_count_city_photos_path(:id =>city_photo.id), :id=>"like_count",:method => "get",:remote=> true %>
                                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">c</span>
                                
                                
