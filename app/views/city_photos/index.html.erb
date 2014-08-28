@@ -1,1 +1,23 @@
-<%= render 'city_photos/city_photos'%>
+<%= javascript_include_tag "endless_page.js" %>
+
+        <section id="main">
+            <div class="wrap group">
+            	<% if signed_in?%> 
+                       <%if(request.path=="/city_photos")%>
+                        <article class="entry box isotope-item" id="intro" style="float:none;">
+                            <div class="entry-content-cnt">
+                                <aside class="widget widget_ci_about_widget group">
+                                  <div class="widget_about group">
+                                   <img alt="about me" class="aligncenter" src="/assets/city_tour.jpg">
+                                     <h3 class="widget-title"> <%= link_to 'Create an City Photo', new_city_photo_path %></h3>
+                                    </div>
+                                </aside>
+                            </div>
+                        </article><!-- #intro -->
+                        <%end%>
+                        <%end%>
+ 				<div id="city_product"><%= render "city_photos/city_photos" %></div>
+              <%= will_paginate @city_photos %>
+           </div>
+         </section>
+

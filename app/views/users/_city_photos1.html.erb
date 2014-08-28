@@ -1,12 +1,22 @@
- <!-- <div id="box-container"> -->
-       <%= javascript_include_tag "city_photos.js.coffee" %>
-       
-                    <div id="entry-listing" class="group">
-                       
-                          <% @city_photos.each do |city_photo| %>
+<% if signed_in?%> 
+                         <%if(request.path=="/city_photos")%>
+                        <article class="entry box isotope-item" id="intro">
+                            <div class="entry-content-cnt">
+                                <aside class="widget widget_ci_about_widget group">
+                                    
 
-                        
-                        <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
+                                    <div class="widget_about group">
+                                        <img alt="about me" class="aligncenter" src="/assets/InitiativeStart1.png">
+                                         
+                                     <h3 class="widget-title"> <%= link_to 'Create an City Photo', new_city_photo_path %></h3>
+                                    </div>
+                                </aside>
+                            </div>
+                        </article>
+                        <%end%>
+                        <%end%>
+                          <% @city_photos.each do |city_photo| %>
+                        <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image" >
                             <div class="entry-content-cnt">
                             <div class="entry-content">
                         <a href="<%= city_photo.image.url%>"data-lightbox="fancybox[215]" class="thumb" ><%= image_tag city_photo.image.url ,:class=>"attachment-ci_listing_thumb"%></a>
@@ -22,10 +32,8 @@
                                 <a class="comments-no" <%= link_to "",city_photo%><%= city_photo.city_comments.count %></a> &nbsp;
                                 <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to (image_tag "like.png"),like_city_photo_city_photos_path(:id =>city_photo.id),:method => "post",:remote => true,:id => "like_city_photo"%>&nbsp;</span>
                                 </a>
-                                <a val= "<%=city_photo.id %>"><%= link_to Like.where(:likeable_type=>"CityPhoto",:likeable_id=>city_photo.id).sum(:count) ,like_count_city_photos_path(:id =>city_photo.id), :id=>"like_count",:method => "get",:remote=> true %>
+                                <a val= "<%=city_photo.id %>"><%= link_to Like.where(:likeable_type=>"CityPhoto",:likeable_id=>city_photo.id).sum(:count),like_count_city_photos_path(:id =>city_photo.id), :id=>"like_count",:method => "get",:remote=> true %>
                                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">c</span>
-                               
-                               
                                 </div>
                             </div>
                            
@@ -35,23 +43,3 @@
                             <%end%>
                         </article>
                    <%end%>
-                       
-                    </div><!-- #entry-listing -->
-    
-               <!--      <div class="nav">
-                        <a id="nextpage" href="content1.html">Next Page</a>
-                    </div> -->
-
- <!-- </div>  -->
-
-
-
-
-<!-- <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/66565660ns.gif" /></p></noscript> -->
-
-
-<!-- end olark code -->
-
-</body>
-</html>
-

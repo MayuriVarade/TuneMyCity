@@ -1,5 +1,5 @@
-$('#initiatives').append('<%= j render(@initiatives) %>');
-<% if @initiatives.next_page %>
+jQuery('#initiative_product').append("<%= j render(:partial => 'initiatives/initiatives') %>");
+<% if @initiatives.next_page  %>
   $('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
 <% else %>
   $('.pagination').remove();

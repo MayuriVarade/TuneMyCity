@@ -1,0 +1,13 @@
+jQuery('#dashboard_product').append("<%= j render(:partial => 'users/common') %>");
+<% if @initiatives.next_page && @city_photos.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
+  $('.pagination_cphoto').replaceWith('<%= j will_paginate(@city_photos) %>');
+<% elsif @initiatives.next_page %>
+	$('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
+<% elsif @city_photos.next_page %>
+	$('.pagination_cphoto').replaceWith('<%= j will_paginate(@city_photos) %>');
+<% else %>
+  $('.pagination').remove();
+  $('.pagination_cphoto').remove();
+<% end %>
+<% sleep 1 %>

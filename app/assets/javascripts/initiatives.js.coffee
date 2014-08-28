@@ -33,3 +33,4 @@ jQuery ->
     else
       $('#initiative_city_id').empty()
       $('#initiative_city_id').parent().hide()
+

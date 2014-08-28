@@ -1,19 +1,21 @@
 class InitiativesController < ApplicationController
-    require 'will_paginate/array'
-    before_filter :authenticate, except: [:index,:comments, :create]
-    helper_method :sort_column, :sort_direction
+  
+     before_filter :authenticate, except: [:index,:comments, :create]
+       require 'will_paginate/array'
+    # helper_method :sort_column, :sort_direction
   # GET /initiatives
   # GET /initiatives.json
   def index
-    @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 5,:order => "created_at DESC")
+     if (signed_in?)
+    @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 6,:order => "created_at DESC")
     @user = User.find_by_id(current_user2)
 
-    @hash = Gmaps4rails.build_markers(@initiatives) do |initiative, marker|
-      marker.lat initiative.latitude
-      marker.lng initiative.longitude
-      marker.title initiative.title
-      marker.infowindow initiative.initiative_description
-    end
+    # @hash = Gmaps4rails.build_markers(@initiatives) do |initiative, marker|
+    #   marker.lat initiative.latitude
+    #   marker.lng initiative.longitude
+    #   marker.title initiative.title
+    #   marker.infowindow initiative.initiative_description
+    # end
     #    @initiatives
     #  else
     #   "abcd"
@@ -22,8 +24,17 @@ class InitiativesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @initiative1 }
+      format.js
     end
-   
+  else
+    @initiatives = Initiative.all
+      @user = User.find_by_id(current_user2)
+    @initiative1 = Hash["initiative" => @initiatives]
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @initiative1 }
+    end
+  end
   end
 
   # GET /initiatives/1

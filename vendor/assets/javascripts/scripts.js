@@ -1,3 +1,4 @@
+
 jQuery(window).load( function($) {
 
 //
@@ -185,6 +186,30 @@ jQuery.ias({
     pagination  : ".nav",
     next        : "#nextpage",
     loader  : "",
+    onRenderComplete: function(items) {
+      var $newElems = jQuery(items).addClass("newItem");
+
+      $newElems.hide().imagesLoaded(function(){
+        if( jQuery(".flexslider").length > 0) {
+          jQuery(".flexslider").flexslider({
+            'controlNav': true,
+            'directionNav': true
+          });
+        }
+        jQuery(this).show();
+        jQuery('#infscr-loading').fadeOut('normal');
+        jQuery("#entry-listing").isotope('appended', $newElems );
+        loadAudioPlayer();
+      });
+    }
+    });
+
+jQuery.ias({
+    container   : "#entry-listing",
+    item        : ".entry",
+    pagination  : ".nav",
+    next        : "#nextpage",
+    loader  : "/assets/ajax-loader.gif",
     onRenderComplete: function(items) {
       var $newElems = jQuery(items).addClass("newItem");
 

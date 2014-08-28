@@ -32,3 +32,6 @@ jQuery ->
     else
       $('#user_city_id').empty()
       $('#user_city_id').parent().hide()
+
+
+

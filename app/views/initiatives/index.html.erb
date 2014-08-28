@@ -1,6 +1,24 @@
- <%#= render 'users/home' %>
-  <%#= render 'layouts/header'%>
-  
- <%= render "initiatives/initiatives" %>
+<%= javascript_include_tag "endless_page.js" %>
 
+        <section id="main">
+            <div class="wrap group">
+            	<% if signed_in? %>
+                      <%if(request.path=="/initiatives")%>
+                        <article class="entry box " id="intro" style="float:none;"><br>
+                           <div class="entry-content-cnt">
+                                 <aside class="widget widget_ci_about_widget group">
+                                     <div class="widget_about group">
+                                     <img alt="about me" class="aligncenter" src="/assets/VHAInnovationInitiative_image.jpg">
+                                      <h3 class="widget-title"> <%= link_to 'Create an Initiative', new_initiative_path %></h3>
+                                    </div>
+                                </aside>
+                            </div>
+                        </article><!-- #intro -->
+                        <%end%>
+                         <%end%>
 
+ 				<div id="initiative_product"><%= render "initiatives/initiatives" %></div>
+              <%= will_paginate @initiatives %>
+           </div>
+         
+        </section>

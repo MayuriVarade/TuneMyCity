@@ -36,9 +36,7 @@ Tunemycity::Application.routes.draw do
       get :like_count
     end
  end
-  get 'city_photos/index'
-  get 'city_photos/edit'
-  get 'city_photos/new'
+ 
 
   resources :authentications
 
@@ -61,10 +59,7 @@ Tunemycity::Application.routes.draw do
   match '/city_photos/:id/city_comments', :to => "city_photos#city_comments"
   match '/initiatives/:id/like_count_initiative', :to =>"initiatives#like_count_initiative"
   match '/users/validations/check_email', :to=>"users#check_email"
-  get 'initiatives/index'
-  get 'initiatives/edit'
-  get 'initiatives/new'
-  get 'initiatives/show'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

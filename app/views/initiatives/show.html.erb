@@ -8,7 +8,7 @@
                         <article class="entry box format-standard">
                             <div class="entry-intro">
                                 <h1 align="left"><%= @initiative.initiative_name rescue nil %></h1>
-                                <div align="left"><span class="entry-meta">Posted by <strong><%= @initiative.user.name rescue nil %></strong>, at <time datetime="2012-08-07"><%= @initiative.created_at.strftime("#{@initiative.created_at.day.ordinalize}  %B, %Y")%></time>
+                                <div align="left"><span class="entry-meta">Posted by <strong><%= @initiative.user.name rescue nil %></strong>, at <time datetime="2012-08-07"><%= @initiative.created_at.strftime("#{@initiative.created_at.day}  %B, %Y")%></time>
                                 </div>
                                 </span> 
                                 <div align="right">
@@ -44,6 +44,7 @@
                                                 <p>
                                                   <%= f.text_area :body ,:cols=>"30", :rows=>"4" %>
                                                   <%= f.hidden_field :user_id,:value => current_user2.id%>
+                                                  <%= f.hidden_field :name,:value => current_user2.name%>
                                             </fieldset>
                                             <p align="right"><%= f.submit "Add comment", :class => 'btn btn-info' %></p>
                                              <% end %>
@@ -59,8 +60,9 @@
                                       <% @comments.each do |comment| %>
                                     <li class="comment">
                                         
-                                      <div  align="left">  <span class="comment-meta">Posted by <strong><%= comment.user.name rescue nil %></strong>, at <time datetime="2012-08-07"><%= @initiative.created_at.strftime("#{@initiative.created_at.day.ordinalize}  %B, %Y")%></time> 
+                                      <div  align="left">  <span class="comment-meta">Posted by <strong><%= comment.user.name rescue nil %></strong>, at <time><%= @initiative.created_at.strftime("#{comment.created_at.day.ordinalize}  %B, %Y")%></time> 
                                          </div> 
+
                                         <div class="comment-text group">
                                             <%= image_tag @initiative.image.url(:thumb), :class=>"avatar"%>
 

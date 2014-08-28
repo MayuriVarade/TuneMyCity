@@ -24,7 +24,7 @@ def create
             render 'new'
           else 
           sign_in user
-          @user = current_user.id
+          @user = current_user2.id
           render :status =>200,:json => @user.to_json
           end
   else

@@ -1,18 +1,30 @@
 class CityPhotosController < ApplicationController
-      require 'will_paginate/array'
+
    before_filter :authenticate, except: [:index,:city_comments]
   # GET /city_photos
   # GET /city_photos.json
+  # respond_to :html, :xml, :json
+        require 'will_paginate/array'
   def index
-    @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 5,:order => "created_at DESC")
+     if (signed_in?)
+     @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 6,:order => "created_at DESC")
      @user = User.find_by_id(current_user2)
-
-     @city_photos1 = Hash["city_photo" => @city_photos]
-     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @initiative1 }
+# raise  @city_photos1.inspect
+    @city_photos1 = Hash["city_photo" => @city_photos]
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @city_photos1 }
+      format.js
     end
-
+  else
+    @city_photos = CityPhoto.all
+      @user = User.find_by_id(current_user2)
+    @city_photos1 = Hash["city_photo" => @city_photos]
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @city_photos1 }
+    end
+  end
   end
 
   # GET /city_photos/1
@@ -57,7 +69,7 @@ class CityPhotosController < ApplicationController
    
       else
         @city_photo = CityPhoto.new(params[:city_photo])
-         # @city_photo.likes=0
+        @user = User.find_by_id(current_user2)
          respond_to do |format|
             if @city_photo.save
               format.html { redirect_to @city_photo, notice: 'City photo was successfully created.' }
@@ -97,7 +109,7 @@ end
  end
   def like_count
      @city_photo=CityPhoto.find_by_id(params[:id])
-     @likes = @city_photo.likes(@city_photo.id) rescue nil
+     @likes = @city_photo.likes1(@city_photo.id) rescue nil
      @likes1 = Hash["likes" => @likes]
      respond_to do |format|
       format.html # show.html.erb

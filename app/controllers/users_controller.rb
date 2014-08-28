@@ -73,13 +73,13 @@ end
          @initiatives = Initiative.paginate(:page => params[:page],:per_page => 10,:order => "created_at DESC")
          @city_photos = CityPhoto.all
        elsif (signed_in?) and (@user)
-      @initiatives = Initiative.find_all_by_city_id(current_user2.city_id)
-      @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id)
+         @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 3,:order => "created_at DESC")
+         @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 3,:order => "created_at DESC")
        else
-      @initiatives = Initiative.all
-      @city_photos = CityPhoto.all
+         @initiatives = Initiative.paginate(:page => params[:page],:order => "created_at DESC",:per_page => 3)
+         @city_photos = CityPhoto.paginate(:page => params[:page],:order => "created_at DESC",:per_page =>3)
     end
-    
+   
   end
   def select
    @user = User.find_by_id(current_user2) 

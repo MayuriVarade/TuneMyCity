@@ -523,7 +523,7 @@ Content
 }
 
 .box .entry-desc {
-  padding: 8px 12px 10px;
+  /*padding: 8px 12px 10px;*/
   background: #f7f7f7;
   border-top: 1px solid #fff;
 
@@ -698,8 +698,8 @@ Format Specific Styles
 */
 
 #intro.box {
-  width: 250px;
-  padding: 5px;
+  width: 502px;
+  padding: 0px;
 }
 
 #intro .entry-content-cnt {
@@ -1208,8 +1208,8 @@ Widgets
 
 /* About Widget */
 .widget_about img {
-  width: 112px;
-  height: 105px;
+  width: 368px;
+  height: 137px;
   margin-bottom: 1.125em;
 }
 
@@ -2149,7 +2149,9 @@ Media Queries
   margin-left: 13px;
 }
 
-.lt-ie8 .group { min-height: 1px; }
+.lt-ie8 .
+
+ { min-height: 1px; }
 
 .lt-ie8  #navigation > li {
   float: left;
@@ -2405,4 +2407,41 @@ table {
 .alert-box span {
     font-weight:bold;
     text-transform:uppercase;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  background-color: white;
+  color: black;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 1.4em; /* equiv 14px */
+  line-height: 1.5; /* adapt to your design */
+}
+/* you shall not pass */
+div, textarea, table, td, th, code, pre, samp {
+  word-wrap: break-word;
+}
+.left {
+    float: left;
+}
+.right {
+     float: right;
+}
+.w50 {
+    width: 50%;
+}
+/*.outer, .inner {
+
+  *display: block;
+}*/
+
+
+
+.inner {
+    /* specify padding, can be changed while remaining fixed width of .outer */
+     width: 300px;
+   
+     
+
 }

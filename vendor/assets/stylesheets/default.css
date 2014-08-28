@@ -1,3 +1,4 @@
+
 /*
 ============================================================================
 default color scheme (light blue) #5f91ab
@@ -556,6 +557,7 @@ input[type="submit"].btn.btn-mini {
   vertical-align: middle;
   *zoom: 1;
 }
+
 
 .btn-group:first-child {
   *margin-left: 0;
