@@ -1,53 +1,35 @@
  <%= javascript_include_tag "initiatives.js.coffee" %>
-
-                    <div id="entry-listing" class="group">
-                       
-                           <% @initiatives.each do |initiative| %>
-                                <% if initiative.is_approved %>
-
-                         <%# if (Initiative.find(current_user2.city_id).city_name)%>
-                        <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
-                            <div class="entry-content-cnt">
-                            <div class="entry-content">
-                        <a href="<%= initiative.image.url%>"data-lightbox="fancybox[215]" class="thumb" ><%= image_tag initiative.image.url ,:class=>"attachment-ci_listing_thumb"%></a>
-                           </div>
-                                 <%= developed(initiative)%>
-                                    
-                            </div>
-
-                            <div class="entry-desc">
-                          
-                                <h1><a ><%= link_to initiative.initiative_name,initiative%></a></h1>
-                                
-                                   <strong><%= City.find(initiative.city_id).city_name%></strong>
-                                 <!--  -->
-                                <div class="entry-meta group">
-                                    
-                                <a class="comments-no" <%= link_to "",initiative%><%= initiative.comments.count %></a>
-                                
-                                   <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to 'Good Initiative',like_initiative_initiatives_path(:id =>initiative.id),:method => "post",:remote => true,:id => "like_initiative"%>&nbsp;</span>
-                                   </a>
-                                <a><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
-                               </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">i</span>
-                                
-                             <!--   <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a> -->
-                                </div>
-                            </div>
-                           
-                             <% if current_user2 == initiative.user %>
-                            <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
-                            <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                            <%end%>
-                        </article>
-                   <%#end%>
-                     <%end%>
-                       <%end%>
+    <div id="entry-listing" class="group">
+        <% @initiatives.each do |initiative| %>
+          <% if initiative.is_approved %>
+             <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
+              <div class="entry-content-cnt">
+               <div class="entry-content">
+                <a href="<%= initiative.image.url%>"data-lightbox="fancybox[215]" class="thumb" ><%= image_tag initiative.image.url ,:class=>"attachment-ci_listing_thumb"%></a>
+                </div>
+                <%= developed(initiative)%>
+                </div>
+                <div class="entry-desc">
+                 <h1><a ><%= link_to initiative.initiative_name,initiative%></a></h1>
+                  <strong><%= City.find(initiative.city_id).city_name%></strong>
+                  <div class="entry-meta group">
+                   <a class="comments-no" <%= link_to "",initiative%><%= initiative.comments.count %></a>
+                   <a data-post-id="215" class="heart-this loved" href="#" title="You love this."><span class="heart-no"><%= link_to 'Good Initiative',like_initiative_initiatives_path(:id =>initiative.id),:method => "post",:remote => true,:id => "like_initiative"%>&nbsp;</span>
+                  </a>
+                  <a><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
+                  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">i</span>
+                  </div>
+                  </div>
+                  <% if current_user2 == initiative.user %>
+                  <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
+                  <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <%end%>
+                  </article>
+                  <%end%>
+                  <%end%>
           
 <style>
 p.normal {font-style:normal;}
 p.italic {font-style:italic;}
 p.oblique {font-style:oblique;}
 </style>
-
-
-  

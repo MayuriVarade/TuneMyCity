@@ -1,6 +1,5 @@
+ <div id="entry-listing" class="group"> 
 
-          <div id="entry-listing" class="group"> 
-            
                      <% if signed_in?%> 
                          <%if(request.path=="/city_photos")%>
                         <article class="entry box item " id="intro">
@@ -11,36 +10,19 @@
                                         <h3 class="widget-title"> <%= link_to 'Create an City Photo', new_city_photo_path %></h3>
                                     </div>
                                 </aside>
-
-                             <!--    <aside class="widget widget_ci_twitter_widget group">
-                                    <h3 class="widget-title">Recent tweets</h3>
-
-                                    <div id="twitter_update_list">
-                                        <ul>
-                                            <li><span>@<a href="#">handle</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere tortor :)</span> <a href="#" class="twitter-time">about 6 hours ago</a></li>
-
-                                            <li><span>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere tortor. <a href="#">http://www.example.com</a></span> <a href="#" class="twitter-time">about 11 hours ago</a></li>
-                                        </ul>
-                                    </div>
-                                </aside> -->
                             </div>
                         </article><!-- #intro -->
                         <%end%>
                         <%end%>
                           <% @city_photos.each do |city_photo| %>
-
-                        
                         <article id="post-<%= "#{city_photo.id}c" %>" class="post-<%= "#{city_photo.id}c" %> category-people category-photography category-pretty-girls entry box format-image" >
                             <div class="entry-content-cnt" >
                             <div class="entry-content" >
                         <a href="<%= city_photo.image.url%>"data-lightbox="fancybox[<%= "#{city_photo.id}c" %>]" class="thumb" ><%= image_tag city_photo.image.url,:class=>"attachment-ci_listing_thumb"%></a>
-                           </div>
-                                 
+                           </div>    
                             </div>
-
                             <div class="entry-desc" >
                                 <h1><a><%= link_to city_photo.title.truncate(20, :omission => "..."),city_photo%></a></h1>
-                                
                                 <div class="entry-meta group">
                                       <strong><%= City.find(city_photo.city_id).city_name%></strong>&nbsp;
                                 <a class="comments-no" <%= link_to "",city_photo%><%= city_photo.city_comments.count %></a> &nbsp;
@@ -57,45 +39,32 @@
                             <%end%>
                         </article>
                    <%end%>
-          
-           
                        <% if signed_in? %>
                       <%if(request.path=="/initiatives")%>
                         <article class="entry box isotope-item" id="intro">
-                           
                             <div class="entry-content-cnt">
-                                 
-                                <aside class="widget widget_ci_about_widget group">
-
-                                    <div class="widget_about group">
+                                 <aside class="widget widget_ci_about_widget group">
+                                   <div class="widget_about group">
                                         <img alt="about me" class="aligncenter" src="/assets/InitiativeStart1.png">
                               
                                      <h3 class="widget-title"> <%= link_to 'Create an Initiative', new_initiative_path %></h3>
                                     </div>
                                 </aside>
-                   
-                            </div>
-
+                                 </div>
                         </article><!-- #intro -->
                         <%end%>
                          <%end%>
-
-                           <% @initiatives.each do |initiative| %>
+                        <% @initiatives.each do |initiative| %>
                                 <% if initiative.is_approved %>
-
-                         <%# if (Initiative.find(current_user2.city_id).city_name)%>
                         <article id="post-<%= initiative.id %>" class="post-<%= initiative.id %> category-people category-photography category-pretty-girls entry box format-image" >
                             <div class="entry-content-cnt">
                             <div class="entry-content">
                         <a href="<%= initiative.image.url%>"data-lightbox="fancybox[<%= initiative.id %>]" class="thumb" ><%= image_tag initiative.image.url ,:class=>"attachment-ci_listing_thumb"%></a>
                            </div>
                                  <%= developed(initiative)%>
-                                
                             </div>
-
-                                <div class="entry-desc">
+                            <div class="entry-desc">
                                 <h1><a ><%= link_to initiative.initiative_name.truncate(20, :omission => "..."),initiative%></a></h1>
-                                   
                                 <div class="entry-meta group">
                                    <strong><%= City.find(initiative.city_id).city_name%></strong> 
                                 <a class="comments-no" <%= link_to "",initiative%><%= initiative.comments.count %></a>
@@ -104,8 +73,7 @@
                                    </a>
                                 <a><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
                                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">i</span>
-                                
-                             <!--   <a class="entry-permalink" href="#" title="Permalink to High fashion model in autumn/winter clothes wearing sunglasses.">High fashion model in autumn/winter clothes wearing sunglasses.</a> -->
+                            
                                 </div>
                             </div>
                            
@@ -114,17 +82,12 @@
                             <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                             <%end%>
                         </article>
-                   <%#end%>
                      <%end%>
                        <%end%>
            
    </div>
- 
- <!--  </div> -->      <!--  </section> --><!--  #main -->
 <style>
 p.normal {font-style:normal;}
 p.italic {font-style:italic;}
 p.oblique {font-style:oblique;}
 </style>
-
-  
