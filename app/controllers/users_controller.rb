@@ -76,8 +76,8 @@ end
          @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 3,:order => "created_at DESC")
          @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 3,:order => "created_at DESC")
        else
-         @initiatives = Initiative.paginate(:page => params[:page],:order => "created_at DESC",:per_page => 10)
-         @city_photos = CityPhoto.paginate(:page => params[:page],:order => "created_at DESC",:per_page =>10)
+         @initiatives = Initiative.paginate(:page => params[:page],:order => "created_at DESC",:per_page => 3)
+         @city_photos = CityPhoto.paginate(:page => params[:page],:order => "created_at DESC",:per_page =>3)
     end
    
   end
