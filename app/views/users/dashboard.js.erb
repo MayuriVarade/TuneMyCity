@@ -1,13 +1,23 @@
-jQuery('#dashboard_product').append("<%= j render(:partial => 'users/common') %>");
-<% if @initiatives.next_page && @city_photos.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
-  $('.pagination_cphoto').replaceWith('<%= j will_paginate(@city_photos) %>');
-<% elsif @initiatives.next_page %>
-	$('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
-<% elsif @city_photos.next_page %>
-	$('.pagination_cphoto').replaceWith('<%= j will_paginate(@city_photos) %>');
+// jQuery('#dashboard_product').append(' <%= j render ('users/common') %>');
+// <% if @initiatives.next_page && @city_photos.next_page %>
+//   $('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
+//   $('.pagination_cphoto').replaceWith('<%= j will_paginate(@city_photos) %>');
+// <% elsif @initiatives.next_page %>
+// 	$('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
+// <% elsif @city_photos.next_page %>
+// 	$('.pagination_cphoto').replaceWith('<%= j will_paginate(@city_photos) %>');
+// <% else %>
+//   $('.pagination').remove();
+//   $('.pagination_cphoto').remove();
+// <% end %>
+// <% sleep 1 %>
+
+$('#dashboard_product').append("<%=j render ('users/common')%>");
+
+<% if (@initiatives.current_page == @initiatives.total_pages) && (@city_photos.current_page == @city_photos.total_pages)%>
+  $('#view-more').remove();
 <% else %>
-  $('.pagination').remove();
-  $('.pagination_cphoto').remove();
+  $('#view-more a').attr('href', '<%= url_for(page: @initiatives.current_page + 1) %>');
+  $('#view-more a').attr('href', '<%= url_for(page: @city_photos.current_page + 1) %>');
 <% end %>
 <% sleep 1 %>
