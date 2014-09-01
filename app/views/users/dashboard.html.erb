@@ -124,11 +124,12 @@ Please Select Your Country State and City
 </div>
 
 <ul id="images">
-        <section id="main" >
+        <section id="main"  >
                  <!-- <div id="entry-listing" class="group">  -->
             <div class="wrap group">
   <div id="dashboard_product"><%= render "users/common" %></div>
     <%= will_paginate @initiatives %>
+
                           </div><!-- #wrap -->     
             <!--  </div> #entry-listing -->
 
@@ -141,12 +142,14 @@ Please Select Your Country State and City
 
 
      <ul id="images">
-        <section id="main" style="width:1450px;"  >
+        <section id="main" >
                  <!-- <div id="entry-listing" class="group">  -->
             <div class="wrap group">
        
               <div id="dashboard_product"><%= render "users/common" %></div>
               <%= will_paginate @initiatives %>
+                 <%#= will_paginate @city_photos %>
+
                            </div><!-- #wrap -->     
             <!--  </div> #entry-listing -->
 

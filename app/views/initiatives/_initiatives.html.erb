@@ -1,5 +1,6 @@
  <%= javascript_include_tag "initiatives.js.coffee" %>
     <div id="entry-listing" class="group">
+      <div id="main">
         <% @initiatives.each do |initiative| %>
           <% if initiative.is_approved %>
              <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
@@ -27,6 +28,7 @@
                   </article>
                   <%end%>
                   <%end%>
+                </div>
           
 <style>
 p.normal {font-style:normal;}

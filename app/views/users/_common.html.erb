@@ -1,5 +1,5 @@
  <div id="entry-listing" class="group"> 
-
+<div id="main">
                      <% if signed_in?%> 
                          <%if(request.path=="/city_photos")%>
                         <article class="entry box item " id="intro">
@@ -39,6 +39,10 @@
                             <%end%>
                         </article>
                    <%end%>
+               </div>
+                  </div>
+                <div id="entry-listing" class="group"> 
+               <div id="sidebar">
                        <% if signed_in? %>
                       <%if(request.path=="/initiatives")%>
                         <article class="entry box isotope-item" id="intro">
@@ -84,7 +88,7 @@
                         </article>
                      <%end%>
                        <%end%>
-           
+          </div>  
    </div>
 <style>
 p.normal {font-style:normal;}

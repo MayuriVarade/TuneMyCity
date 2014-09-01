@@ -1,4 +1,4 @@
-jQuery('#dashboard_product').append(' <%= j render ('users/common') %>');
+jQuery('#dashboard_product').append("<%= j render(:partial => 'users/common') %>");
 <% if @initiatives.next_page && @city_photos.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate(@initiatives) %>');
   $('.pagination_cphoto').replaceWith('<%= j will_paginate(@city_photos) %>');
@@ -11,4 +11,3 @@ jQuery('#dashboard_product').append(' <%= j render ('users/common') %>');
   $('.pagination_cphoto').remove();
 <% end %>
 <% sleep 1 %>
-
