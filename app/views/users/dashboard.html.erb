@@ -141,23 +141,15 @@ Please Select Your Country State and City
 
 
      <ul id="images">
-        <section id="main" style="width:1700px" >
+        <section id="main" >
                  <!-- <div id="entry-listing" class="group">  -->
-      <!--       <div class="wrap group">
+            <div class="wrap group">
        
-              <div id="dashboard_product"><%#= render "users/common" %></div>
+              <div id="dashboard_product"><%= render "users/common" %></div>
               <%= will_paginate @initiatives %>
-                           </div>  --> 
-       <!--   </div> #entry-listing -->
-<div id="dashboard_product">
-  <%= render "users/common" %>
-</div>
+                           </div><!-- #wrap -->     
+            <!--  </div> #entry-listing -->
 
-<% unless @initiatives.current_page == @initiatives.total_pages %>
-  <p id="view-more">
-    <%= link_to('View More', url_for(page: @initiatives.current_page + 1)) %>
-  </p>
-<% end %> 
    
         </section>
 
