@@ -33,11 +33,12 @@ end
 def show
 @user = User.find(params[:id])
 end
+ def edit
+# @user = User.find(params[:id])
+  @user = User.find_by_id(current_user2)
+# @title = "Edit user"
+end
 
-def edit
-    @user = User.find(params[:id])
-
-end 
 
  def update
   @user = User.find(params[:id])
@@ -47,7 +48,7 @@ end
     end
   
      if @user.update_attributes(params[:user])
-        # flash[:notice] = "Profile updated."
+       flash[:notice] = "Profile updated."
         if current_user2.role? :user
             redirect_to root_path
         else
@@ -73,8 +74,8 @@ end
          @initiatives = Initiative.paginate(:page => params[:page],:per_page => 10,:order => "created_at DESC")
          @city_photos = CityPhoto.all
        elsif (signed_in?) and (@user)
-         @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 5,:order => "created_at DESC")
-         @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:per_page => 5,:order => "created_at DESC")
+         @initiatives = Initiative.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:order => "created_at ASC",:per_page => 5)
+         @city_photos = CityPhoto.find_all_by_city_id(current_user2.city_id).paginate(:page => params[:page],:order => "created_at ASC",:per_page => 5)
        else
          @initiatives = Initiative.paginate(:page => params[:page],:order => "created_at DESC",:per_page => 5)
          @city_photos = CityPhoto.paginate(:page => params[:page],:order => "created_at DESC",:per_page => 5)

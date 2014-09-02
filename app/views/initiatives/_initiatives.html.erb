@@ -19,7 +19,13 @@
                   </a>
                   <a><%= link_to Like.where(:likeable_type=>"Initiative",:likeable_id=>initiative.id).sum(:count) ,like_count_initiative_initiatives_path(:id =>initiative.id), :id=>"like_count_initiative",:method => "get",:remote=> true %>
                   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:20px">i</span>
+
                   </div>
+                  </div>
+                  <div class="entry-all">
+                  <%= image_tag initiative.user.image.url, :class=>"avatar" ,:style=>"border-radius: 50%;background: none repeat scroll 0 0 #f7f7f7;float;left;width: 110px;height: 90px;margin: 5px;"%>
+                 <p style="top: 89%;left: 67%;"><%= initiative.user.name%>&nbsp;<%= initiative.user.username%></p>
+                   
                   </div>
                   <% if current_user2 == initiative.user %>
                   <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
@@ -28,6 +34,7 @@
                   </article>
                   <%end%>
                   <%end%>
+                  
                 </div>
           
 <style>

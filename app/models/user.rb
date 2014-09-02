@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    attr_accessible :email, :password, :password_confirmation, :name,:country_id, :state_id, :city_id, :role_ids, :salt,:reputation, :username, :auth_token
+    attr_accessible :email, :password, :password_confirmation,:image, :name,:country_id, :state_id, :city_id, :role_ids, :salt,:reputation, :username, :auth_token
     attr_accessor :password
     before_save :encrypt_password
     has_and_belongs_to_many :roles
@@ -17,8 +17,19 @@ class User < ActiveRecord::Base
      # validates_uniqueness_of :reputation
     email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-    validates :email,:name,:uniqueness => { :case_sensitive => false }
-    validates :password, :confirmation => true,:on => :create
+   has_attached_file :image, :styles => { :thumb => "90x70>",:medium => "150x150" },
+  processors: [:thumbnail, :compression],
+    :storage => :s3, :s3_credentials => "#{Rails.root}/config/s3.yml",
+                    :path => ":rails_root/public/attachments/city_photos/:id/:style/:basename.:extension",
+                    
+                    :convert_options => {
+                          :thumb => "-compose Copy -gravity center -extent 100x100",
+                          :medium => "-compose Copy -gravity center -extent 350x350",
+                          
+                      }
+
+
+ validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
      # validates_uniqueness_of :email,:presence => {:message => 'email id already exists'},:format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
  
     # def has_voted?(initiative)

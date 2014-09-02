@@ -3,17 +3,16 @@
 <html>
 <head>
    <title>Tunemycity</title>
-<%= javascript_include_tag "application" %>
+
 <%= stylesheet_link_tag "style.css", "default.css","jquery.fancybox.css","jquery-ui.css"%>
-<script src="/assets/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="/assets/superfish.js" type="text/javascript"></script>
 <script src="/assets/jquery.isotope.js" type="text/javascript"></script>
 <script src="/assets/jquery.fancybox.pack.js" type="text/javascript"></script>
 <script src="/assets/jquery.flexslider-min.js" type="text/javascript"></script>
 <script src="/assets/jquery.ias.min.js" type="text/javascript"></script>
-
 <script defer src="/assets/scripts.js" type="text/javascript"></script>
- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
  <%= csrf_meta_tags %>
 </head>
 <body>
@@ -72,11 +71,23 @@
                 <ul id="navigation" class="group">
                     <% if (signed_in?)  %>
                     Logged in as <%= current_user2.name %>.
-                   <li>  <%= link_to "Log out", signout_path ,:method => :delete, :id => "sign_out" %></li>
+                   <!-- <li>  <%#= link_to "Log out", signout_path ,:method => :delete, :id => "sign_out" %></li> -->
                     <li class="current_page_item"><a href="/">Home</a></li>
                       <li><%= link_to 'Initiative', initiatives_path %></li>
                        <li><%= link_to 'City Photo', city_photos_path %></li>
                        <li><%= link_to "Choose your location", select_path %></li>
+                           <li>
+                        <a href="#">Post Formats</a>
+                        <ul>
+                            
+                             <li> <%= link_to "Edit Profile", edit_path %></li>
+                            <li> <%= link_to "Log out", signout_path ,:method => :delete, :id => "sign_out" %></li>
+                            <!-- <li><a href="format-gallery.html">Gallery Format</a></li>
+                            <li><a href="format-video.html">Video Format</a></li>
+                            <li><a href="format-audio.html">Audio Format</a></li>
+                            <li><a href="format-quote.html">Quote Format</a></li> -->
+                        </ul>
+                    </li>
                     <% else %> 
                     <li> <%= link_to "Log in", log_in_path %></li>
                <% end %>    
@@ -85,13 +96,7 @@
         </nav>
          
     </header>
- <footer id="footer">
-            <div class="wrap group">
-                <div class="footer-text">
-                    <a href="#">Tunemycity</a> @2014
-                </div>
-            </div>
-        </footer>
+        
          <% flash.each do |name, msg| %>
   <% if signed_in?%>
   <%= content_tag :div, msg, :class => "alert-box #{name}",:style=>"color:#0C3; text-align:center;" %>
@@ -99,7 +104,19 @@
     <%= content_tag :div, msg, :class => "alert-box #{name}", :style=>"color:red; text-align:center;" %>
   <% end %>
  <% end %> 
-<%= yield %>
+<div id="page">
+  
+      <%= yield %>
+
+        <footer id="footer">
+            <div class="wrap group">
+                <div class="footer-text">
+                    <a href="#">Tunemycity</a> @2014
+                </div>
+            </div>
+        </footer>
+
+  </div><!-- #page -->
 </body>
 
 </html>

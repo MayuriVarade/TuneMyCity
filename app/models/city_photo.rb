@@ -1,7 +1,8 @@
 require 'obscenity/active_model'
 class CityPhoto < ActiveRecord::Base
   attr_accessible :about, :is_approved, :name, :title, :user_id, :image, :city_name, :body, :user_id, :city_photo_id, :likes, :country_id, :state_id, :city_id
-  has_attached_file :image, :styles => { :thumb => "100x100",:medium => "350x350" },
+  has_attached_file :image, :styles => { :thumb => "100x100>",:medium => "350x350" },
+  processors: [:thumbnail, :compression],
     :storage => :s3, :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :path => ":rails_root/public/attachments/city_photos/:id/:style/:basename.:extension",
                     

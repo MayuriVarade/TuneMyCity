@@ -1,7 +1,7 @@
  <%= javascript_include_tag "city_photos.js.coffee" %>
 
  <div id="entry-listing" class="group">
-    <div id="main">
+    <!-- <div id="main"> -->
    <% @city_photos.each do |city_photo| %>
      <article id="post-215" class="post-215 category-people category-photography category-pretty-girls entry box format-image">
        <div class="entry-content-cnt">
@@ -26,6 +26,13 @@
          <%end%>
          </article>
          <%end%>
+
+         <div class="nav">
+              <a id="nextpage" href="http://localhost:3000/city_photos?page=<%= @city_photos.next_page %>">Next Page</a>
+         </div>
+
          </div><!-- #entry-listing -->
 
-    </div>
+    <!-- </div> -->
+
+    

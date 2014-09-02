@@ -1,5 +1,6 @@
-<%= javascript_include_tag "endless_page.js" %>
- <section id="main">
+<%#= javascript_include_tag "endless_page.js" %>
+      
+      <section id="main">
             <div class="wrap group">
             	<% if signed_in?%> 
                        <%if(request.path=="/city_photos")%>
@@ -15,8 +16,33 @@
                         </article><!-- #intro -->
                         <%end%>
                         <%end%>
- 				<div id="city_product"><%= render "city_photos/city_photos" %></div>
-              <%= will_paginate @city_photos %>
+ 				<div><%= render "city_photos/city_photos" %></div>
+              <%#= will_paginate @city_photos %>
            </div>
          </section>
+
+
+
+
+<script type="text/javascript">
+jQuery.ias({
+    container   : "#entry-listing",
+    item        : ".entry",
+    pagination  : ".nav",
+    next        : "#nextpage",
+    loader  : "/assets/ajax-loader.gif",
+    onRenderComplete: function(items) {
+
+      var $newElems = jQuery(items).addClass("newItem");
+
+      $newElems.hide().imagesLoaded(function(){
+        
+        jQuery(this).show();
+        jQuery('#infscr-loading').fadeOut('normal');
+        jQuery("#entry-listing").isotope('appended', $newElems );
+        
+      });
+    }
+    });
+</script>
 

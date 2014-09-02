@@ -43,6 +43,7 @@ class InitiativesController < ApplicationController
     @initiative = Initiative.find(params[:id])
     @comments = Comment.where(:initiative_id => @initiative).paginate(:page => params[:page],:per_page => 4,:order => "created_at DESC")
     # raise @comments.inspect
+    @users = User.all
     @user = User.find_by_id(current_user2)
     
      # @city= City.find_by_id(@initiative.city_id)

@@ -60,12 +60,13 @@
                                       <% @comments.each do |comment| %>
                                     <li class="comment">
                                         
-                                      <div  align="left">  <span class="comment-meta">Posted by <strong><%= comment.user.name rescue nil %></strong>, at <time><%= @initiative.created_at.strftime("#{comment.created_at.day.ordinalize}  %B, %Y")%></time> 
+                                      <div  align="left">  <span class="comment-meta">Posted by <strong><%= comment.user.name rescue nil %></strong>, at <time><%= comment.created_at.strftime("#{comment.created_at.day.ordinalize}  %B, %Y")%></time> 
                                          </div> 
 
                                         <div class="comment-text group">
-                                            <%= image_tag @initiative.image.url(:thumb), :class=>"avatar"%>
-
+                                          <%# @users.each do |user|%>
+                                            <%= image_tag comment.user.image.url, :class=>"avatar"%>
+                                         <%#end%>
                                             <div class="comment-copy">
                                            <p align="left"><%= comment.body %></p>
                                             </div>

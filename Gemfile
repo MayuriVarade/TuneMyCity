@@ -8,6 +8,7 @@ gem 'rails', '3.2.16'
 gem "bcrypt-ruby", :require => "bcrypt"
 
 gem 'paperclip'
+gem 'paperclip-compression'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
